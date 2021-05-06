@@ -1,7 +1,7 @@
 {
   "name": "vue-path-store",
   "description": "A simple reactive store for Vue, that uses the dot notation path syntax",
-  "version": "2.0.7",
+  "version": "0.0.0-semantic-release",
   "author": "Giannis Koutsaftakis",
   "license": "MIT",
   "repository": "https://github.com/kouts/vue-path-store",
@@ -13,7 +13,7 @@
     "keypath",
     "dot"
   ],
-  "files": [],  
+  "files": [],
   "main": "",
   "module": "",
   "scripts": {
@@ -35,7 +35,6 @@
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/eslint-parser": "^7.13.14",
-    "@testing-library/jest-dom": "^5.11.10",
     "@vue/cli-plugin-babel": "^4.5.12",
     "@vue/cli-plugin-unit-jest": "^4.5.12",
     "@vue/cli-service": "^4.5.12",
