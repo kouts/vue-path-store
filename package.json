@@ -30,7 +30,7 @@
     "rollup": "rollup -c",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "build": "rollup -c && vuepress build docs",
+    "build": "rollup -c",
     "lint": "eslint . --ext .js,.vue",
     "lint-fix": "eslint . --fix --ext .js,.vue"
   },
