@@ -13,20 +13,6 @@ const rollupConfigs = [
   }
 ].map(({ name, file }) => ({
   input: `src/${file}.js`,
-  plugins: [
-    nodeResolve(),
-    babel({
-      presets: [
-        [
-          '@vue/cli-plugin-babel/preset',
-          {
-            useBuiltIns: false
-          }
-        ]
-      ]
-    }),
-    terser()
-  ],
   external: ['vue', 'vuex'],
   output: [
     {
@@ -39,10 +25,36 @@ const rollupConfigs = [
       }
     },
     {
+      format: 'umd',
+      file: `dist/${file}.umd.min.js`,
+      name,
+      globals: {
+        vue: 'Vue',
+        vuex: 'Vuex'
+      }
+    },    
+    {
       format: 'es',
       file: `dist/${file}.js`
     }
-  ]
+  ],
+  plugins: [
+    nodeResolve(),
+    babel({
+      babelHelpers: 'bundled',
+      presets: [
+        [
+          '@vue/cli-plugin-babel/preset',
+          {
+            useBuiltIns: false
+          }
+        ]
+      ]
+    }),
+    terser({
+      include: [/^.+\.min\.js$/]      
+    })
+  ]  
 }))
 
 export default rollupConfigs

@@ -1,1 +1,204 @@
-import t from"vuex";import r from"vue";function n(t){return(n="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}function o(t){return function(t){if(Array.isArray(t))return e(t)}(t)||function(t){if("undefined"!=typeof Symbol&&null!=t[Symbol.iterator]||null!=t["@@iterator"])return Array.from(t)}(t)||function(t,r){if(!t)return;if("string"==typeof t)return e(t,r);var n=Object.prototype.toString.call(t).slice(8,-1);"Object"===n&&t.constructor&&(n=t.constructor.name);if("Map"===n||"Set"===n)return Array.from(t);if("Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n))return e(t,r)}(t)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function e(t,r){(null==r||r>t.length)&&(r=t.length);for(var n=0,o=new Array(r);n<r;n++)o[n]=t[n];return o}function i(t){return!isNaN(t)&&!isNaN(parseFloat(t))}function a(t){return Array.isArray(t)}function u(t){for(var r,n=/(\w+)|\[([^\]]+)\]/g,o=[];r=n.exec(t||"");)"["===t[r.index]?o.push(r[2]):o.push(r[1]);return o}function f(t,r){for(var n=u(r),o=n.length,e=0;e<o;e++){if(void 0===t[n[e]])return;t=t[n[e]]}return t}var c=function(t,o,e){for(var f=u(o),c=f.length,s=c-1,l=0;l<c;l++){var p=f[l];if(l!==s){var y=t[p];y&&"object"===n(y)?(y.hasOwnProperty("__ob__")||r.set(t,p,y),a(y)&&!i(f[l+1])&&r.set(t,p,{})):i(f[l+1])?r.set(t,p,[]):r.set(t,p,{})}else r.set(t,p,e);t=t[p]}},s=function(t,r,o){if("string"==typeof r)c(t,r,o);else{if(!function(t){return"object"===n(t)&&!Array.isArray(t)&&null!==t}(r))throw Error("Arguments must be either string or object.");for(var e in r)c(t,e,r[e])}},l=["pop","push","reverse","shift","sort","splice","unshift"],p=function(r){var n={set:function(t,r){var n=r.path,o=r.value;s(t,n,o)},toggle:function(t,r){var n=r.path;c(t,n,!f(t,n))}};l.forEach((function(t){n[t]=function(r,n){var e=n.path,i=n.args,u=f(r,e);if(!a(u))throw Error("Argument must be an array");u[t].apply(u,o(i))}})),r.mutations=Object.assign({},r.mutations||{},n);var e=new t.Store(r);return e.set=function(t,r){e.commit("set",{path:t,value:r})},e.toggle=function(t){e.commit("toggle",{path:t})},l.forEach((function(t){e[t]=function(){for(var r=arguments.length,n=new Array(r),o=0;o<r;o++)n[o]=arguments[o];var i=n.shift();e.commit(t,{path:i,args:n})}})),e};export{p as createVuexPathStore};
+import Vuex from 'vuex';
+import Vue from 'vue';
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function _toConsumableArray(arr) {
+  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
+}
+
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
+}
+
+function _iterableToArray(iter) {
+  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
+}
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
+}
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
+
+  return arr2;
+}
+
+function _nonIterableSpread() {
+  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function isObject(obj) {
+  return _typeof(obj) === 'object' && !Array.isArray(obj) && obj !== null;
+}
+function isNumeric(str) {
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+function isArray(arr) {
+  return Array.isArray(arr);
+}
+function splitPath(str) {
+  var regex = /(\w+)|\[([^\]]+)\]/g;
+  var result = [];
+  var path;
+
+  while (path = regex.exec(str || '')) {
+    if (str[path.index] === '[') {
+      result.push(path[2]);
+    } else {
+      result.push(path[1]);
+    }
+  }
+
+  return result;
+}
+function getByPath(obj, path) {
+  var parts = splitPath(path);
+  var length = parts.length;
+
+  for (var i = 0; i < length; i++) {
+    if (typeof obj[parts[i]] === 'undefined') {
+      return undefined;
+    }
+
+    obj = obj[parts[i]];
+  }
+
+  return obj;
+}
+
+var setOne = function setOne(obj, pathStr, value) {
+  var path = splitPath(pathStr);
+  var length = path.length;
+  var lastIndex = length - 1;
+
+  for (var index = 0; index < length; index++) {
+    var prop = path[index]; // If we are not on the last index
+    // we start building the data object from the path
+
+    if (index !== lastIndex) {
+      var objValue = obj[prop]; // If objValue exists, is not primitive and is not observable, then make it so using Vue.set
+
+      if (objValue && _typeof(objValue) === 'object') {
+        // eslint-disable-next-line no-prototype-builtins
+        if (!objValue.hasOwnProperty('__ob__')) {
+          Vue.set(obj, prop, objValue);
+        } // Array to object transformation
+        // Check if parent path is an array, we are not on the last item
+        // and the next key in the path is not a number
+
+
+        if (isArray(objValue) && !isNumeric(path[index + 1])) {
+          Vue.set(obj, prop, {});
+        }
+      } else {
+        // Create an empty object or an empty array based on the next path entry
+        if (isNumeric(path[index + 1])) {
+          Vue.set(obj, prop, []);
+        } else {
+          Vue.set(obj, prop, {});
+        }
+      }
+    } else {
+      // If we are on the last index then we just assign the the value to the data object
+      // Note: If we used obj[prop] = value; arrays wouldn't be updated.
+      Vue.set(obj, prop, value);
+    }
+
+    obj = obj[prop];
+  }
+};
+var setMany = function setMany(obj, path, value) {
+  if (typeof path === 'string') {
+    setOne(obj, path, value);
+  } else if (isObject(path)) {
+    for (var key in path) {
+      setOne(obj, key, path[key]);
+    }
+  } else {
+    throw Error('Arguments must be either string or object.');
+  }
+};
+
+var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+
+var createVuexPathStore = function createVuexPathStore(options) {
+  var mutations = {
+    set: function set(state, info) {
+      var path = info.path,
+          value = info.value;
+      setMany(state, path, value);
+    },
+    toggle: function toggle(state, info) {
+      var path = info.path;
+      setOne(state, path, !getByPath(state, path));
+    }
+  };
+  ARRAY_METHODS.forEach(function (method) {
+    mutations[method] = function (state, info) {
+      var path = info.path,
+          args = info.args;
+      var arr = getByPath(state, path);
+
+      if (!isArray(arr)) {
+        throw Error('Argument must be an array');
+      }
+
+      arr[method].apply(arr, _toConsumableArray(args));
+    };
+  });
+  options.mutations = Object.assign({}, options.mutations || {}, mutations);
+  var store = new Vuex.Store(options);
+
+  store.set = function (path, value) {
+    store.commit('set', {
+      path: path,
+      value: value
+    });
+  };
+
+  store.toggle = function (path) {
+    store.commit('toggle', {
+      path: path
+    });
+  };
+
+  ARRAY_METHODS.forEach(function (method) {
+    store[method] = function () {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var path = args.shift();
+      store.commit(method, {
+        path: path,
+        args: args
+      });
+    };
+  });
+  return store;
+};
+
+export { createVuexPathStore };

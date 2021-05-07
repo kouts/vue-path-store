@@ -1,1 +1,147 @@
-import r from"vue";function t(r){return(t="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(r){return typeof r}:function(r){return r&&"function"==typeof Symbol&&r.constructor===Symbol&&r!==Symbol.prototype?"symbol":typeof r})(r)}function n(r){return!isNaN(r)&&!isNaN(parseFloat(r))}function o(r){return Array.isArray(r)}function e(r){for(var t,n=/(\w+)|\[([^\]]+)\]/g,o=[];t=n.exec(r||"");)"["===r[t.index]?o.push(t[2]):o.push(t[1]);return o}function u(r,t){for(var n=e(t),o=n.length,u=0;u<o;u++){if(void 0===r[n[u]])return;r=r[n[u]]}return r}var f=function(u,f,i){for(var s=e(f),a=s.length,c=a-1,y=0;y<a;y++){var p=s[y];if(y!==c){var l=u[p];l&&"object"===t(l)?(l.hasOwnProperty("__ob__")||r.set(u,p,l),o(l)&&!n(s[y+1])&&r.set(u,p,{})):n(s[y+1])?r.set(u,p,[]):r.set(u,p,{})}else r.set(u,p,i);u=u[p]}},i=function(r,n,o){if("string"==typeof n)f(r,n,o);else{if(!function(r){return"object"===t(r)&&!Array.isArray(r)&&null!==r}(n))throw Error("Arguments must be either string or object.");for(var e in n)f(r,e,n[e])}},s=["pop","push","reverse","shift","sort","splice","unshift"],a=function(t){var n=r.observable(t);return n.set=function(r,t){i(n,r,t)},n.toggle=function(r){f(n,r,!u(n,r))},n.get=function(r){return r?u(n,r):n},s.forEach((function(r){n[r]=function(){for(var t=arguments.length,e=new Array(t),f=0;f<t;f++)e[f]=arguments[f];var i=e.shift(),s=u(n,i);if(!o(s))throw Error("Argument must be an array.");s[r].apply(s,e)}})),n};export{a as createPathStore};
+import Vue from 'vue';
+
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function (obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function (obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
+function isObject(obj) {
+  return _typeof(obj) === 'object' && !Array.isArray(obj) && obj !== null;
+}
+function isNumeric(str) {
+  return !isNaN(str) && !isNaN(parseFloat(str));
+}
+function isArray(arr) {
+  return Array.isArray(arr);
+}
+function splitPath(str) {
+  var regex = /(\w+)|\[([^\]]+)\]/g;
+  var result = [];
+  var path;
+
+  while (path = regex.exec(str || '')) {
+    if (str[path.index] === '[') {
+      result.push(path[2]);
+    } else {
+      result.push(path[1]);
+    }
+  }
+
+  return result;
+}
+function getByPath(obj, path) {
+  var parts = splitPath(path);
+  var length = parts.length;
+
+  for (var i = 0; i < length; i++) {
+    if (typeof obj[parts[i]] === 'undefined') {
+      return undefined;
+    }
+
+    obj = obj[parts[i]];
+  }
+
+  return obj;
+}
+
+var setOne = function setOne(obj, pathStr, value) {
+  var path = splitPath(pathStr);
+  var length = path.length;
+  var lastIndex = length - 1;
+
+  for (var index = 0; index < length; index++) {
+    var prop = path[index]; // If we are not on the last index
+    // we start building the data object from the path
+
+    if (index !== lastIndex) {
+      var objValue = obj[prop]; // If objValue exists, is not primitive and is not observable, then make it so using Vue.set
+
+      if (objValue && _typeof(objValue) === 'object') {
+        // eslint-disable-next-line no-prototype-builtins
+        if (!objValue.hasOwnProperty('__ob__')) {
+          Vue.set(obj, prop, objValue);
+        } // Array to object transformation
+        // Check if parent path is an array, we are not on the last item
+        // and the next key in the path is not a number
+
+
+        if (isArray(objValue) && !isNumeric(path[index + 1])) {
+          Vue.set(obj, prop, {});
+        }
+      } else {
+        // Create an empty object or an empty array based on the next path entry
+        if (isNumeric(path[index + 1])) {
+          Vue.set(obj, prop, []);
+        } else {
+          Vue.set(obj, prop, {});
+        }
+      }
+    } else {
+      // If we are on the last index then we just assign the the value to the data object
+      // Note: If we used obj[prop] = value; arrays wouldn't be updated.
+      Vue.set(obj, prop, value);
+    }
+
+    obj = obj[prop];
+  }
+};
+var setMany = function setMany(obj, path, value) {
+  if (typeof path === 'string') {
+    setOne(obj, path, value);
+  } else if (isObject(path)) {
+    for (var key in path) {
+      setOne(obj, key, path[key]);
+    }
+  } else {
+    throw Error('Arguments must be either string or object.');
+  }
+};
+
+var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+
+var createPathStore = function createPathStore(state) {
+  var store = Vue.observable(state);
+
+  store.set = function (path, value) {
+    setMany(store, path, value);
+  };
+
+  store.toggle = function (path) {
+    setOne(store, path, !getByPath(store, path));
+  };
+
+  store.get = function (path) {
+    return path ? getByPath(store, path) : store;
+  };
+
+  ARRAY_METHODS.forEach(function (method) {
+    store[method] = function () {
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var path = args.shift();
+      var arr = getByPath(store, path);
+
+      if (!isArray(arr)) {
+        throw Error('Argument must be an array.');
+      }
+
+      arr[method].apply(arr, args);
+    };
+  });
+  return store;
+};
+
+export { createPathStore };
