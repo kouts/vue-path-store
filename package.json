@@ -34,6 +34,9 @@
     "lint": "eslint . --ext .js,.vue",
     "lint-fix": "eslint . --fix --ext .js,.vue"
   },
+  "release": {
+    "branches": ["main"]
+  },
   "dependencies": {
     "core-js": "^3.10.1",
     "vue": "^2.6.12"
