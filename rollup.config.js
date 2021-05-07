@@ -32,10 +32,10 @@ const rollupConfigs = [
         vue: 'Vue',
         vuex: 'Vuex'
       }
-    },    
+    },
     {
       format: 'es',
-      file: `dist/${file}.js`
+      file: `dist/${file}.esm.js`
     }
   ],
   plugins: [
@@ -52,9 +52,9 @@ const rollupConfigs = [
       ]
     }),
     terser({
-      include: [/^.+\.min\.js$/]      
+      include: [/^.+\.min\.js$/]
     })
-  ]  
+  ]
 }))
 
 export default rollupConfigs
