@@ -16,9 +16,6 @@
     "keypath",
     "dot"
   ],
-  "files": [
-    "dist"
-  ],
   "main": "dist/pathStore.umd.js",
   "module": "dist/pathStore.esm.js",
   "unpkg": "dist/pathStore.umd.js",
