@@ -2,7 +2,10 @@
   "name": "vue-path-store",
   "description": "A simple reactive store for Vue, that uses the dot notation path syntax",
   "version": "0.0.0-semantic-release",
-  "author": "Giannis Koutsaftakis",
+  "author": {
+    "name": "Giannis Koutsaftakis",
+    "email": "koutsaftakis@gmail.com" 
+  },
   "license": "MIT",
   "repository": "https://github.com/kouts/vue-path-store",
   "keywords": [
@@ -13,9 +16,12 @@
     "keypath",
     "dot"
   ],
-  "files": [],
-  "main": "",
-  "module": "",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/pathStore.umd.js",
+  "module": "dist/pathStore.esm.js",
+  "unpkg": "dist/pathStore.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:vue": "vue-cli-service build",
