@@ -37,7 +37,3 @@ export function getByPath(obj, path) {
   }
   return obj
 }
-
-export function testMethod3() {
-  console.log('testMethod3')
-}
