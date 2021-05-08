@@ -4,7 +4,7 @@
   "version": "0.0.0-semantic-release",
   "author": {
     "name": "Giannis Koutsaftakis",
-    "email": "koutsaftakis@gmail.com" 
+    "email": "koutsaftakis@gmail.com"
   },
   "license": "MIT",
   "repository": "https://github.com/kouts/vue-path-store",
@@ -32,7 +32,19 @@
     "lint-fix": "eslint . --fix --ext .js,.vue"
   },
   "release": {
-    "branches": ["main"]
+    "branches": [
+      "main",
+      {
+        "name": "beta",
+        "prerelease": true
+      }
+    ],
+    "plugins": [
+      "@semantic-release/commit-analyzer",
+      "@semantic-release/release-notes-generator",
+      "@semantic-release/npm",
+      "@semantic-release/github"
+    ]
   },
   "dependencies": {
     "core-js": "^3.10.1",
