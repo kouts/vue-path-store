@@ -1,7 +1,7 @@
 import Vuex from 'vuex'
-import { getByPath, isArray } from './utils'
-import { setOne, setMany } from './set.js'
-import { ARRAY_METHODS } from './constants.js'
+import { getByPath, isArray } from './common/utils.js'
+import { setOne, setMany } from './common/set.js'
+import { ARRAY_METHODS } from './common/constants.js'
 
 const createVuexPathStore = (options) => {
   const mutations = {

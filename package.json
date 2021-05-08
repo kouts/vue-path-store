@@ -16,9 +16,9 @@
     "keypath",
     "dot"
   ],
-  "main": "dist/pathStore.umd.js",
-  "module": "dist/pathStore.esm.js",
-  "unpkg": "dist/pathStore.umd.js",
+  "main": "dist/cjs/pathStore.js",
+  "module": "dist/es/pathStore.js",
+  "unpkg": "dist/umd/pathStore.umd.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:vue": "vue-cli-service build",

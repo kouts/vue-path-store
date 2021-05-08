@@ -2,40 +2,34 @@ import babel from '@rollup/plugin-babel'
 import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 
-const rollupConfigs = [
-  {
-    name: 'pathStore',
-    file: 'pathStore'
-  },
-  {
-    name: 'vuexPathStore',
-    file: 'vuexPathStore'
-  }
-].map(({ name, file }) => ({
-  input: `src/${file}.js`,
+const globals = {
+  vue: 'Vue',
+  vuex: 'Vuex'
+}
+
+const rollupConfigs = ['pathStore', 'vuexPathStore'].map((name) => ({
+  input: `src/${name}.js`,
   external: ['vue', 'vuex'],
   output: [
     {
       format: 'umd',
-      file: `dist/${file}.umd.js`,
+      file: `dist/umd/${name}.js`,
       name,
-      globals: {
-        vue: 'Vue',
-        vuex: 'Vuex'
-      }
+      globals
     },
     {
       format: 'umd',
-      file: `dist/${file}.umd.min.js`,
+      file: `dist/umd/${name}.min.js`,
       name,
-      globals: {
-        vue: 'Vue',
-        vuex: 'Vuex'
-      }
+      globals
     },
     {
       format: 'es',
-      file: `dist/${file}.esm.js`
+      file: `dist/es/${name}.js`
+    },
+    {
+      format: 'cjs',
+      file: `dist/cjs/${name}.js`
     }
   ],
   plugins: [
@@ -46,7 +40,8 @@ const rollupConfigs = [
         [
           '@vue/cli-plugin-babel/preset',
           {
-            useBuiltIns: false
+            useBuiltIns: false,
+            modules: false
           }
         ]
       ]
