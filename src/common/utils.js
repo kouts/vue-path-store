@@ -38,6 +38,6 @@ export function getByPath(obj, path) {
   return obj
 }
 
-export function testMethod2() {
-  console.log('testMethod2')
+export function testMethod3() {
+  console.log('testMethod3')
 }
