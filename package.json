@@ -18,7 +18,7 @@
   ],
   "main": "dist/cjs/pathStore.js",
   "module": "dist/es/pathStore.js",
-  "unpkg": "dist/umd/pathStore.umd.js",
+  "unpkg": "dist/umd/pathStore.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build:vue": "vue-cli-service build",
