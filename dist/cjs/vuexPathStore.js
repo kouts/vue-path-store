@@ -10,22 +10,6 @@ function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'defau
 var Vuex__default = /*#__PURE__*/_interopDefaultLegacy(Vuex);
 var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
-function _typeof(obj) {
-  "@babel/helpers - typeof";
-
-  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
-      return typeof obj;
-    };
-  } else {
-    _typeof = function (obj) {
-      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
-    };
-  }
-
-  return _typeof(obj);
-}
-
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
 }
@@ -59,15 +43,34 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+function _typeof(obj) {
+  "@babel/helpers - typeof";
+
+  if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+    _typeof = function _typeof(obj) {
+      return typeof obj;
+    };
+  } else {
+    _typeof = function _typeof(obj) {
+      return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+    };
+  }
+
+  return _typeof(obj);
+}
+
 function isObject(obj) {
   return _typeof(obj) === 'object' && !Array.isArray(obj) && obj !== null;
 }
+
 function isNumeric(str) {
   return !isNaN(str) && !isNaN(parseFloat(str));
 }
+
 function isArray(arr) {
   return Array.isArray(arr);
 }
+
 function splitPath(str) {
   var regex = /(\w+)|\[([^\]]+)\]/g;
   var result = [];
@@ -83,6 +86,7 @@ function splitPath(str) {
 
   return result;
 }
+
 function getByPath(obj, path) {
   var parts = splitPath(path);
   var length = parts.length;
@@ -139,6 +143,7 @@ var setOne = function setOne(obj, pathStr, value) {
     obj = obj[prop];
   }
 };
+
 var setMany = function setMany(obj, path, value) {
   if (typeof path === 'string') {
     setOne(obj, path, value);

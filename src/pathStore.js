@@ -1,7 +1,7 @@
 import Vue from 'vue'
-import { getByPath, isArray } from './common/utils.js'
-import { setOne, setMany } from './common/set.js'
-import { ARRAY_METHODS } from './common/constants.js'
+import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
+import { setOne, setMany } from 'vue-set-path'
+import { ARRAY_METHODS } from './constants.js'
 
 const createPathStore = (state) => {
   const store = Vue.observable(state)
