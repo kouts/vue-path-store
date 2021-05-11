@@ -46,6 +46,9 @@
       "@semantic-release/github"
     ]
   },
+  "peerDependencies": {
+    "vue": "^2.6.12"
+  },
   "devDependencies": {
     "@babel/core": "^7.14.0",
     "@babel/eslint-parser": "^7.13.14",
