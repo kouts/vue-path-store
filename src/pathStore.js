@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
-import { setOne, setMany } from 'vue-set-path'
+import { setOne, setMany, deleteMany } from 'vue-set-path'
 import { ARRAY_METHODS } from './constants.js'
 
 const createPathStore = (state) => {
@@ -16,6 +16,10 @@ const createPathStore = (state) => {
 
   store.get = (path) => {
     return path ? getByPath(store, path) : store
+  }
+
+  store.delete = (path) => {
+    deleteMany(store, path)
   }
 
   ARRAY_METHODS.forEach((method) => {

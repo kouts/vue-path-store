@@ -1,5 +1,5 @@
 import Vuex from 'vuex'
-import { setOne, setMany } from 'vue-set-path'
+import { setOne, setMany, deleteMany } from 'vue-set-path'
 import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
 import { ARRAY_METHODS } from './constants.js'
 
@@ -12,6 +12,10 @@ const createVuexPathStore = (options) => {
     toggle(state, info) {
       const { path } = info
       setOne(state, path, !getByPath(state, path))
+    },
+    delete(state, info) {
+      const { path } = info
+      deleteMany(state, path)
     }
   }
 
@@ -36,6 +40,10 @@ const createVuexPathStore = (options) => {
 
   store.toggle = (path) => {
     store.commit('toggle', { path })
+  }
+
+  store.delete = (path) => {
+    store.commit('delete', { path })
   }
 
   ARRAY_METHODS.forEach((method) => {
