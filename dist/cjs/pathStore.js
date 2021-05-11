@@ -12,11 +12,11 @@ function _typeof(obj) {
   "@babel/helpers - typeof";
 
   if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
-    _typeof = function (obj) {
+    _typeof = function _typeof(obj) {
       return typeof obj;
     };
   } else {
-    _typeof = function (obj) {
+    _typeof = function _typeof(obj) {
       return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
     };
   }
@@ -27,12 +27,15 @@ function _typeof(obj) {
 function isObject(obj) {
   return _typeof(obj) === 'object' && !Array.isArray(obj) && obj !== null;
 }
+
 function isNumeric(str) {
   return !isNaN(str) && !isNaN(parseFloat(str));
 }
+
 function isArray(arr) {
   return Array.isArray(arr);
 }
+
 function splitPath(str) {
   var regex = /(\w+)|\[([^\]]+)\]/g;
   var result = [];
@@ -48,6 +51,7 @@ function splitPath(str) {
 
   return result;
 }
+
 function getByPath(obj, path) {
   var parts = splitPath(path);
   var length = parts.length;
@@ -104,6 +108,7 @@ var setOne = function setOne(obj, pathStr, value) {
     obj = obj[prop];
   }
 };
+
 var setMany = function setMany(obj, path, value) {
   if (typeof path === 'string') {
     setOne(obj, path, value);
