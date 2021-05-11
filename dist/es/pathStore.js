@@ -45,7 +45,7 @@ function splitPath(str) {
 }
 
 function getByPath(obj, path) {
-  var parts = splitPath(path);
+  var parts = isArray(path) ? path : splitPath(path);
   var length = parts.length;
 
   for (var i = 0; i < length; i++) {
@@ -113,6 +113,24 @@ var setMany = function setMany(obj, path, value) {
   }
 };
 
+var deleteOne = function deleteOne(obj, pathStr) {
+  var path = splitPath(pathStr);
+  var prop = path.pop();
+  Vue["delete"](getByPath(obj, path), prop);
+};
+
+var deleteMany = function deleteMany(obj, path) {
+  if (typeof path === 'string') {
+    deleteOne(obj, path);
+  } else if (isArray(path)) {
+    path.forEach(function (item) {
+      deleteOne(obj, item);
+    });
+  } else {
+    throw Error('Arguments must be either string or array.');
+  }
+};
+
 var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
 var createPathStore = function createPathStore(state) {
@@ -128,6 +146,10 @@ var createPathStore = function createPathStore(state) {
 
   store.get = function (path) {
     return path ? getByPath(store, path) : store;
+  };
+
+  store["delete"] = function (path) {
+    deleteMany(store, path);
   };
 
   ARRAY_METHODS.forEach(function (method) {
