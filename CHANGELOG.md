@@ -1,3 +1,10 @@
+# [1.3.0-beta.5](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.4...v1.3.0-beta.5) (2021-05-11)
+
+
+### Bug Fixes
+
+* fixed unpkg entry ([e1c440e](https://github.com/kouts/vue-path-store/commit/e1c440e62fd46d469e33b5752753bfdb1130b6c1))
+
 # [1.3.0-beta.4](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.3...v1.3.0-beta.4) (2021-05-11)
 
 
