@@ -1,3 +1,10 @@
+# [1.3.0-beta.7](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.6...v1.3.0-beta.7) (2021-05-12)
+
+
+### Bug Fixes
+
+* renamed delete method to del ([b8886fd](https://github.com/kouts/vue-path-store/commit/b8886fd02dff89d116f25a1554f531f501cc0811))
+
 # [1.3.0-beta.6](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.5...v1.3.0-beta.6) (2021-05-11)
 
 
