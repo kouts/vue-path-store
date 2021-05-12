@@ -42,7 +42,7 @@ const createVuexPathStore = (options) => {
     store.commit('toggle', { path })
   }
 
-  store.delete = (path) => {
+  store.del = (path) => {
     store.commit('delete', { path })
   }
 
