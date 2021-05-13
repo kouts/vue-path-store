@@ -18,22 +18,21 @@ const createPathStore = (state) => {
     },
     del(path) {
       deleteMany(store, path)
-    }
+    },
+    ...ARRAY_METHODS.reduce((acc, method) => {
+      const fn = (...args) => {
+        const path = args.shift()
+        const arr = getByPath(store, path)
+        if (!isArray(arr)) {
+          throw Error('Argument must be an array.')
+        }
+        arr[method](...args)
+      }
+      return Object.assign(acc, { [method]: fn })
+    }, {})
   }
 
-  const arrayMethods = ARRAY_METHODS.reduce((acc, method) => {
-    const fn = (...args) => {
-      const path = args.shift()
-      const arr = getByPath(store, path)
-      if (!isArray(arr)) {
-        throw Error('Argument must be an array.')
-      }
-      arr[method](...args)
-    }
-    return Object.assign(acc, { [method]: fn })
-  }, {})
-
-  return Object.assign(store, methods, arrayMethods)
+  return Object.assign(store, methods)
 }
 
 export { createPathStore }
