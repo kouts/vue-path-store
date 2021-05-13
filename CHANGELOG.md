@@ -1,3 +1,10 @@
+# [1.3.0-beta.8](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.7...v1.3.0-beta.8) (2021-05-13)
+
+
+### Bug Fixes
+
+* combined array methods with methods ([f22cc39](https://github.com/kouts/vue-path-store/commit/f22cc39930351d4cf9c0b38c6bf4eb98353c86ee))
+
 # [1.3.0-beta.7](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.6...v1.3.0-beta.7) (2021-05-12)
 
 
