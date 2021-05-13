@@ -240,6 +240,9 @@
           path: path
         });
       },
+      get: function get(path) {
+        return path ? getByPath(store.state, path) : store.state;
+      },
       del: function del(path) {
         store.commit('del', {
           path: path

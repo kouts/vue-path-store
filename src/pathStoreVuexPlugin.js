@@ -10,6 +10,9 @@ const pathStoreVuexPlugin = (store) => {
     toggle(path) {
       store.commit('toggle', { path })
     },
+    get(path) {
+      return path ? getByPath(store.state, path) : store.state
+    },
     del(path) {
       store.commit('del', { path })
     },
