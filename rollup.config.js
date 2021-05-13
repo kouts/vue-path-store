@@ -3,11 +3,10 @@ import { terser } from 'rollup-plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
 
 const globals = {
-  vue: 'Vue',
-  vuex: 'Vuex'
+  vue: 'Vue'
 }
 
-const rollupConfigs = ['pathStore', 'vuexPathStore'].map((name) => ({
+const rollupConfigs = ['pathStore', 'pathStoreVuexPlugin'].map((name) => ({
   input: `src/${name}.js`,
   external: ['vue', 'vuex'],
   output: [

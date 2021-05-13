@@ -2,13 +2,64 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-var Vuex = require('vuex');
 var Vue = require('vue');
 
 function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
 
-var Vuex__default = /*#__PURE__*/_interopDefaultLegacy(Vuex);
 var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
+
+function ownKeys(object, enumerableOnly) {
+  var keys = Object.keys(object);
+
+  if (Object.getOwnPropertySymbols) {
+    var symbols = Object.getOwnPropertySymbols(object);
+
+    if (enumerableOnly) {
+      symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+    }
+
+    keys.push.apply(keys, symbols);
+  }
+
+  return keys;
+}
+
+function _objectSpread2(target) {
+  for (var i = 1; i < arguments.length; i++) {
+    var source = arguments[i] != null ? arguments[i] : {};
+
+    if (i % 2) {
+      ownKeys(Object(source), true).forEach(function (key) {
+        _defineProperty(target, key, source[key]);
+      });
+    } else if (Object.getOwnPropertyDescriptors) {
+      Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+    } else {
+      ownKeys(Object(source)).forEach(function (key) {
+        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+      });
+    }
+  }
+
+  return target;
+}
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
 
 function _toConsumableArray(arr) {
   return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -176,59 +227,26 @@ var deleteMany = function deleteMany(obj, path) {
 
 var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
-var createVuexPathStore = function createVuexPathStore(options) {
-  var mutations = {
-    set: function set(state, info) {
-      var path = info.path,
-          value = info.value;
-      setMany(state, path, value);
+var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
+  var methods = _objectSpread2({
+    set: function set(path, value) {
+      store.commit('set', {
+        path: path,
+        value: value
+      });
     },
-    toggle: function toggle(state, info) {
-      var path = info.path;
-      setOne(state, path, !getByPath(state, path));
+    toggle: function toggle(path) {
+      store.commit('toggle', {
+        path: path
+      });
     },
-    "delete": function _delete(state, info) {
-      var path = info.path;
-      deleteMany(state, path);
+    del: function del(path) {
+      store.commit('del', {
+        path: path
+      });
     }
-  };
-  ARRAY_METHODS.forEach(function (method) {
-    mutations[method] = function (state, info) {
-      var path = info.path,
-          args = info.args;
-      var arr = getByPath(state, path);
-
-      if (!isArray(arr)) {
-        throw Error('Argument must be an array');
-      }
-
-      arr[method].apply(arr, _toConsumableArray(args));
-    };
-  });
-  options.mutations = Object.assign({}, options.mutations || {}, mutations);
-  var store = new Vuex__default['default'].Store(options);
-
-  store.set = function (path, value) {
-    store.commit('set', {
-      path: path,
-      value: value
-    });
-  };
-
-  store.toggle = function (path) {
-    store.commit('toggle', {
-      path: path
-    });
-  };
-
-  store["delete"] = function (path) {
-    store.commit('delete', {
-      path: path
-    });
-  };
-
-  ARRAY_METHODS.forEach(function (method) {
-    store[method] = function () {
+  }, ARRAY_METHODS.reduce(function (acc, method) {
+    var fn = function fn() {
       for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
         args[_key] = arguments[_key];
       }
@@ -239,8 +257,52 @@ var createVuexPathStore = function createVuexPathStore(options) {
         args: args
       });
     };
-  });
-  return store;
+
+    return Object.assign(acc, _defineProperty({}, method, fn));
+  }));
+
+  var mutations = _objectSpread2({
+    set: function set(state, info) {
+      var path = info.path,
+          value = info.value;
+      setMany(state, path, value);
+    },
+    toggle: function toggle(state, info) {
+      var path = info.path;
+      setOne(state, path, !getByPath(state, path));
+    },
+    del: function del(state, info) {
+      var path = info.path;
+      deleteMany(state, path);
+    }
+  }, ARRAY_METHODS.reduce(function (acc, method) {
+    var fn = function fn(state, info) {
+      var path = info.path,
+          args = info.args;
+      var arr = getByPath(state, path);
+
+      if (!isArray(arr)) {
+        throw Error('Argument must be an array');
+      }
+
+      arr[method].apply(arr, _toConsumableArray(args));
+    };
+
+    return Object.assign(acc, _defineProperty({}, method, fn));
+  }));
+
+  var _loop = function _loop(type) {
+    var entry = store._mutations[type] || (store._mutations[type] = []);
+    entry.push(function wrappedMutationHandler(payload) {
+      mutations[type].call(store, store.state, payload);
+    });
+  };
+
+  for (var type in mutations) {
+    _loop(type);
+  }
+
+  return Object.assign(store, methods);
 };
 
-exports.createVuexPathStore = createVuexPathStore;
+exports.pathStoreVuexPlugin = pathStoreVuexPlugin;

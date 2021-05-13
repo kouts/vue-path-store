@@ -8,6 +8,59 @@
 
   var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+
+      if (enumerableOnly) {
+        symbols = symbols.filter(function (sym) {
+          return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+        });
+      }
+
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(Object(source), true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(Object(source)).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
   function _typeof(obj) {
     "@babel/helpers - typeof";
 
@@ -144,24 +197,21 @@
   var createPathStore = function createPathStore(state) {
     var store = Vue__default['default'].observable(state);
 
-    store.set = function (path, value) {
-      setMany(store, path, value);
-    };
-
-    store.toggle = function (path) {
-      setOne(store, path, !getByPath(store, path));
-    };
-
-    store.get = function (path) {
-      return path ? getByPath(store, path) : store;
-    };
-
-    store["delete"] = function (path) {
-      deleteMany(store, path);
-    };
-
-    ARRAY_METHODS.forEach(function (method) {
-      store[method] = function () {
+    var methods = _objectSpread2({
+      set: function set(path, value) {
+        setMany(store, path, value);
+      },
+      toggle: function toggle(path) {
+        setOne(store, path, !getByPath(store, path));
+      },
+      get: function get(path) {
+        return path ? getByPath(store, path) : store;
+      },
+      del: function del(path) {
+        deleteMany(store, path);
+      }
+    }, ARRAY_METHODS.reduce(function (acc, method) {
+      var fn = function fn() {
         for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
           args[_key] = arguments[_key];
         }
@@ -175,8 +225,11 @@
 
         arr[method].apply(arr, args);
       };
-    });
-    return store;
+
+      return Object.assign(acc, _defineProperty({}, method, fn));
+    }, {}));
+
+    return Object.assign(store, methods);
   };
 
   exports.createPathStore = createPathStore;
