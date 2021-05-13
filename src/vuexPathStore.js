@@ -13,7 +13,7 @@ const createVuexPathStore = (options) => {
       const { path } = info
       setOne(state, path, !getByPath(state, path))
     },
-    delete(state, info) {
+    del(state, info) {
       const { path } = info
       deleteMany(state, path)
     }
@@ -40,6 +40,10 @@ const createVuexPathStore = (options) => {
 
   store.toggle = (path) => {
     store.commit('toggle', { path })
+  }
+
+  store.get = (path) => {
+    return path ? getByPath(store.state, path) : store.state
   }
 
   store.del = (path) => {
