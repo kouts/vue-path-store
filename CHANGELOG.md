@@ -1,3 +1,10 @@
+# [1.3.0-beta.9](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.8...v1.3.0-beta.9) (2021-05-13)
+
+
+### Features
+
+* added get method ([8ed8f25](https://github.com/kouts/vue-path-store/commit/8ed8f251f751d29f1f35d37eb47028586690943b))
+
 # [1.3.0-beta.8](https://github.com/kouts/vue-path-store/compare/v1.3.0-beta.7...v1.3.0-beta.8) (2021-05-13)
 
 
