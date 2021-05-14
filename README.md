@@ -40,6 +40,8 @@ new Vue({
       {{ $s.message }}
     </div>
     <button type="button" @click="$s.set('message', 'Hello world!')">
+      Set message
+    </button>
   </div>
 </template>
 ```
@@ -75,6 +77,8 @@ new Vue({
       {{ $store.state.message }}
     </div>
     <button type="button" @click="$store.set('message', 'Hello world!')">
+      Set message
+    </button>
   </div>
 </template>
 ```
