@@ -67,6 +67,7 @@
     "vue": "^2.6.12",
     "vue-set-path": "^1.1.1",
     "vuepress": "^1.8.2",
-    "vuepress-plugin-vue-example": "^1.1.2"
+    "vuepress-plugin-vue-example": "^1.1.2",
+    "vuex": "^3.6.2"
   }
 }
