@@ -22,7 +22,7 @@ const pathStoreVuexPlugin = (store) => {
         return store.commit(method, { path, args })
       }
       return Object.assign(acc, { [method]: fn })
-    })
+    }, {})
   }
 
   const mutations = {
@@ -48,7 +48,7 @@ const pathStoreVuexPlugin = (store) => {
         return arr[method](...args)
       }
       return Object.assign(acc, { [method]: fn })
-    })
+    }, {})
   }
 
   for (const type in mutations) {
