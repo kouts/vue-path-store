@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/kouts/vue-path-store/compare/v2.0.0...v2.0.1) (2021-05-17)
+
+
+### Bug Fixes
+
+* fixed missing vuex method ([3af4e70](https://github.com/kouts/vue-path-store/commit/3af4e70e1dcdc94a9bbaae2697a4ff40e4a5958f))
+
 # [2.0.0](https://github.com/kouts/vue-path-store/compare/v1.3.0...v2.0.0) (2021-05-17)
 
 
