@@ -26,7 +26,7 @@ const createPathStore = (state) => {
         if (!isArray(arr)) {
           throw Error('Argument must be an array.')
         }
-        arr[method](...args)
+        return arr[method](...args)
       }
       return Object.assign(acc, { [method]: fn })
     }, {})
