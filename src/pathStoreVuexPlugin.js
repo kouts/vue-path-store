@@ -19,7 +19,7 @@ const pathStoreVuexPlugin = (store) => {
     ...ARRAY_METHODS.reduce((acc, method) => {
       const fn = (...args) => {
         const path = args.shift()
-        store.commit(method, { path, args })
+        return store.commit(method, { path, args })
       }
       return Object.assign(acc, { [method]: fn })
     })
@@ -45,7 +45,7 @@ const pathStoreVuexPlugin = (store) => {
         if (!isArray(arr)) {
           throw Error('Argument must be an array')
         }
-        arr[method](...args)
+        return arr[method](...args)
       }
       return Object.assign(acc, { [method]: fn })
     })
