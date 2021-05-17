@@ -63,8 +63,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.pop('data')
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([1, 2, 3])
+    expect(dataOf(wrapper)).toEqual([1, 2, 3])
   })
 
   it('pushes an element into an array', async () => {
@@ -72,8 +71,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.push('data', 4)
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([1, 2, 3, 4])
+    expect(dataOf(wrapper)).toEqual([1, 2, 3, 4])
   })
 
   it('reverses an an array', async () => {
@@ -81,8 +79,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.reverse('data')
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([3, 2, 1])
+    expect(dataOf(wrapper)).toEqual([3, 2, 1])
   })
 
   it('removes the first element of an array', async () => {
@@ -90,8 +87,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.shift('data')
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([2, 3, 4])
+    expect(dataOf(wrapper)).toEqual([2, 3, 4])
   })
 
   it('sorts an array', async () => {
@@ -99,8 +95,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.sort('data')
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([1, 2, 3, 4])
+    expect(dataOf(wrapper)).toEqual([1, 2, 3, 4])
   })
 
   it('splices an array', async () => {
@@ -108,8 +103,7 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.splice('data', 0, 2)
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([3, 4])
+    expect(dataOf(wrapper)).toEqual([3, 4])
   })
 
   it('adds elements to the beginning of an array', async () => {
@@ -117,7 +111,6 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.set('data', arr)
     wrapper.vm.$store.unshift('data', 1, 2)
     await waitNT(wrapper.vm)
-    const data = dataOf(wrapper)
-    expect(data).toEqual([1, 2, 3, 4])
+    expect(dataOf(wrapper)).toEqual([1, 2, 3, 4])
   })
 })
