@@ -1,3 +1,17 @@
+# [2.0.0](https://github.com/kouts/vue-path-store/compare/v1.3.0...v2.0.0) (2021-05-17)
+
+
+### Features
+
+* added return value to array methods ([219fc2e](https://github.com/kouts/vue-path-store/commit/219fc2ec917f3a52805e49ddc011b02732d98b16))
+* return array method result ([d306177](https://github.com/kouts/vue-path-store/commit/d3061773ff34a3cd102f73dfff3f633c80f40482))
+
+
+### BREAKING CHANGES
+
+* added return value to vuex plugin array methods
+* array methods now return a value
+
 # [1.3.0](https://github.com/kouts/vue-path-store/compare/v1.2.2...v1.3.0) (2021-05-14)
 
 
