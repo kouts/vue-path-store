@@ -1,10 +1,10 @@
 # vue-path-store <a href="https://npm.im/vue-path-store"><img src="https://badgen.net/npm/v/vue-path-store"></a> ![](https://img.badgesize.io/kouts/vue-path-store/main/dist/umd/pathStore.min.js.svg) ![](https://img.badgesize.io/kouts/vue-path-store/main/dist/umd/pathStore.min.js.svg?compression=gzip)
 
-`vue-path-store` is a lightweight shared state management solution for Vue.
-At it's heart lays a simple reactive store, that uses the dot notation path syntax for data mutation.  
+PathStore is a lightweight **shared** state management solution for Vue.  
+At its heart lays a simple reactive store, which uses the dot notation path syntax for data mutation.  
 
-It also comes with a Vuex plugin flavor so that you can use the dot notation to mutate state in Vuex.
-
+It also comes with a **Vuex plugin** flavor so that you can use dot notation along with the
+full power of Vuex (actions, getters, modules, devtools) as well.
 
 ## Install
 ```sh

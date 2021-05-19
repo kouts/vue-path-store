@@ -13,7 +13,14 @@ module.exports = {
     nav: [{ text: 'Github', link: 'https://github.com/kouts/vue-path-store' }],
     sidebar: [
       ['/', 'Introduction'],
-      ['/installation/', 'Installation']
+      {
+        title: 'Path Store',
+        collapsable: true,
+        children: [
+          ['/path-store/installation/', 'Installation'],
+          ['/path-store/examples/', 'Examples']
+        ]
+      }
     ]
   },
   head: [
