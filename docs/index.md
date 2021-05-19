@@ -8,10 +8,11 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 
 ## Features
 - Share state easily between components using either the object or composition API
-- Use dot notation for mutating state
+- Use dot notation for mutating state (set, delete)
+- Creates intermediate reactive object/array structures if not available while setting state
 - Avoid Vue [change detection caveats](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)
 - Extra methods for `Array` manipulation
-- Utilize the full power of Vuex with the PathStore Vuex Plugin
+- Combine Vuex and dot notation by utilizing the PathStore Vuex Plugin
 
 ## Browsers support
 
@@ -25,7 +26,7 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 import Vue from 'vue
 import { createPathStore } from 'vue-path-store'
 
-// Initialize vue-path-store and provide it to all components
+// Initialize the store and provide it to all components
 Vue.prototype.$s = createPathStore({
   state: {}
 })

@@ -81,7 +81,7 @@ blockquote p {color: #777;}
 }
 
 /* H2 margin fix */
-.theme-default-content:not(.custom) > h2 {
+.theme-default-content:not(.custom) > h2, .theme-default-content:not(.custom) > h3 {
   margin-bottom: 1rem !important;
 }
 
