@@ -8,7 +8,7 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 
 ## Features
 - Share state easily between components using either the object or composition API
-- Use dot notation for mutating state (set, delete)
+- Use dot (or bracket) notation for mutating state (set, delete)
 - Creates intermediate reactive object/array structures if not available while setting state
 - Avoid Vue [change detection caveats](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)
 - Extra methods for `Array` manipulation
@@ -23,7 +23,7 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 ## Quick shared state example
 
 ```js
-import Vue from 'vue
+import Vue from 'vue'
 import { createPathStore } from 'vue-path-store'
 
 // Initialize the store and provide it to all components

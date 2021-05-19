@@ -14,11 +14,12 @@ module.exports = {
     sidebar: [
       ['/', 'Introduction'],
       {
-        title: 'Path Store',
+        title: 'PathStore',
         collapsable: true,
         children: [
           ['/path-store/installation/', 'Installation'],
           ['/path-store/usage/', 'Usage'],
+          ['/path-store/api/', 'API'],
           ['/path-store/examples/', 'Examples']
         ]
       }
