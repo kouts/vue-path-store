@@ -1,6 +1,8 @@
-# vue-path-store
+<div class="text-center mb-3">
+  <img src="vue-path-store.png" alt="Vue PathStore" width="420" />
+</div>
 
-PathStore is a lightweight **shared** state management solution for Vue.  
+**PathStore** is a lightweight **shared** state management solution for Vue.  
 At its heart lays a simple reactive store, which uses the dot notation path syntax for data mutation.  
 
 It also comes with a **Vuex plugin** flavor so that you can use dot notation along with the
