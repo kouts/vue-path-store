@@ -1,5 +1,8 @@
 ## Object API
 
+Since PathStore is just an object, you can share it as any other object in Vue.  
+You can use `Vue.prototype`, a `mixin`, `provide/inject`, `import/export` etc.
+
 ### Sharing the store via the `Vue.prototype`
 
 In the app's entry point (e.g `main.js`)
@@ -29,7 +32,7 @@ Inside components
 </template>
 ```
 
-### Sharing the store with `import` - `export`
+### Sharing the store with `import/export`
 
 Create the store in a separate file (e.g `store.js`)
 ```js
