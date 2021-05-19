@@ -80,11 +80,11 @@ blockquote p {color: #777;}
   box-sizing: content-box;
 }
 
-/* Custom width for dataset pages */
-.dataset-page .theme-default-content:not(.custom) {
-  max-width: 100%;
+/* H2 margin fix */
+.theme-default-content:not(.custom) > h2 {
+  margin-bottom: 1rem !important;
 }
 
-.dataset-page .theme-default-content:not(.custom) ul.pagination a:hover {
-  text-decoration: none;
+.theme-default-content:not(.custom) > h2:first-child + p {
+  margin-top: 0 !important;
 }

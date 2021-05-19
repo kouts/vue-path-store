@@ -18,6 +18,7 @@ module.exports = {
         collapsable: true,
         children: [
           ['/path-store/installation/', 'Installation'],
+          ['/path-store/usage/', 'Usage'],
           ['/path-store/examples/', 'Examples']
         ]
       }
