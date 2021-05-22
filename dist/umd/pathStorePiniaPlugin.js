@@ -1,7 +1,7 @@
 (function (global, factory) {
   typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('vue')) :
   typeof define === 'function' && define.amd ? define(['exports', 'vue'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.pathStore = {}, global.Vue));
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.pathStorePiniaPlugin = {}, global.Vue));
 }(this, (function (exports, Vue) { 'use strict';
 
   function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
@@ -228,11 +228,11 @@
     }, {}));
   }
 
-  var createPathStore = function createPathStore(state) {
-    return Object.assign(Vue__default['default'].observable(state), createPathStoreMethods());
+  var pathStorePiniaPlugin = function pathStorePiniaPlugin(ctx) {
+    return Object.assign(ctx.store.actions = ctx.store.actions || {}, createPathStoreMethods());
   };
 
-  exports.createPathStore = createPathStore;
+  exports.pathStorePiniaPlugin = pathStorePiniaPlugin;
 
   Object.defineProperty(exports, '__esModule', { value: true });
 

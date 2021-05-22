@@ -194,21 +194,19 @@ var deleteMany = function deleteMany(obj, path) {
 
 var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
-var createPathStore = function createPathStore(state) {
-  var store = Vue__default['default'].observable(state);
-
-  var methods = _objectSpread2({
+function createPathStoreMethods() {
+  return _objectSpread2({
     set: function set(path, value) {
-      setMany(store, path, value);
+      setMany(this, path, value);
     },
     toggle: function toggle(path) {
-      setOne(store, path, !getByPath(store, path));
+      setOne(this, path, !getByPath(this, path));
     },
     get: function get(path) {
-      return path ? getByPath(store, path) : store;
+      return path ? getByPath(this, path) : this;
     },
     del: function del(path) {
-      deleteMany(store, path);
+      deleteMany(this, path);
     }
   }, ARRAY_METHODS.reduce(function (acc, method) {
     var fn = function fn() {
@@ -217,19 +215,21 @@ var createPathStore = function createPathStore(state) {
       }
 
       var path = args.shift();
-      var arr = getByPath(store, path);
+      var arr = getByPath(this, path);
 
       if (!isArray(arr)) {
         throw Error('Argument must be an array.');
       }
 
-      arr[method].apply(arr, args);
+      return arr[method].apply(arr, args);
     };
 
     return Object.assign(acc, _defineProperty({}, method, fn));
   }, {}));
+}
 
-  return Object.assign(store, methods);
+var createPathStore = function createPathStore(state) {
+  return Object.assign(Vue__default['default'].observable(state), createPathStoreMethods());
 };
 
 exports.createPathStore = createPathStore;

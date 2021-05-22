@@ -6,7 +6,7 @@ const globals = {
   vue: 'Vue'
 }
 
-const rollupConfigs = ['pathStore', 'pathStoreVuexPlugin'].map((name) => ({
+const rollupConfigs = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePiniaPlugin'].map((name) => ({
   input: `src/${name}.js`,
   external: ['vue', 'vuex'],
   output: [
