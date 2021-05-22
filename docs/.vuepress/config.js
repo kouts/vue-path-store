@@ -19,10 +19,10 @@ module.exports = {
         children: [
           ['/path-store/installation/', 'Installation'],
           ['/path-store/usage/', 'Usage'],
-          ['/path-store/api/', 'API'],
-          ['/path-store/examples/', 'Examples']
+          ['/path-store/api/', 'API']
         ]
-      }
+      },
+      // ['/examples', 'Examples']
     ]
   },
   head: [

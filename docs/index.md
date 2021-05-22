@@ -5,8 +5,12 @@
 **PathStore** is a lightweight **shared** state management solution for Vue.  
 At its heart lays a simple reactive store, which uses the dot notation path syntax for data mutation.  
 
-It also comes with a **Vuex plugin** flavor so that you can use dot notation along with the
+It also comes with:
+
+- a **[Vuex](https://vuex.vuejs.org/) plugin** so that you can use dot notation along with the
 full power of Vuex (actions, getters, modules, devtools) as well.
+
+- a **[Pinia](https://pinia.esm.dev/) plugin** so that you can use dot notation with your favorite fruity store.
 
 ## Features
 - Share state easily between components using either the object or composition API
@@ -14,7 +18,8 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 - Creates intermediate reactive object/array structures if not available while setting state
 - Avoid Vue [change detection caveats](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)
 - Extra methods for `Array` manipulation
-- Combine Vuex and dot notation by utilizing the PathStore Vuex Plugin
+- Enhance Vuex with dot notation by utilizing the PathStore Vuex Plugin
+- Enhance Pinia with dot notation by utilizing the PathStore Pinia Plugin
 
 ## Browsers support
 
