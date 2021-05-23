@@ -22,6 +22,7 @@ module.exports = {
           ['/path-store/api/', 'API']
         ]
       },
+      ['/path-store-vuex-plugin/', 'PathStore Vuex Plugin'],
       // ['/examples', 'Examples']
     ]
   },
