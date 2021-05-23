@@ -15,7 +15,7 @@ module.exports = {
       ['/', 'Introduction'],
       {
         title: 'PathStore',
-        collapsable: true,
+        collapsable: false,
         children: [
           ['/path-store/installation/', 'Installation'],
           ['/path-store/usage/', 'Usage'],
@@ -23,6 +23,7 @@ module.exports = {
         ]
       },
       ['/path-store-vuex-plugin/', 'PathStore Vuex Plugin'],
+      ['/path-store-pinia-plugin/', 'PathStore Pinia Plugin'],
       // ['/examples', 'Examples']
     ]
   },

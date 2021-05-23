@@ -1,4 +1,4 @@
-PathStore Vuex Plugin brings PathStore's [API](../path-store/api/) to Vuex.  
+PathStore Vuex Plugin brings PathStore's [API](../path-store/api/) to [Vuex](https://vuex.vuejs.org/).  
 All methods from PathStore's API are registered as Vuex methods that trigger 
 equivalent mutations.
 
