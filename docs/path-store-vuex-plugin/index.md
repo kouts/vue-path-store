@@ -89,7 +89,7 @@ Using it inside components
     {{ $store.state.message }}
   </div>
   <div>
-    <button @click="$store.set('state.message', 'New message')">
+    <button @click="$store.set('message', 'New message')">
       Set message
     </button>
   </div>
