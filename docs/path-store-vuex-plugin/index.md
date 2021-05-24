@@ -1,9 +1,32 @@
-PathStore Vuex Plugin brings PathStore's [API](../path-store/api/) to [Vuex](https://vuex.vuejs.org/).  
-All methods from PathStore's API are registered as Vuex methods that trigger 
-equivalent mutations.
+##### PathStore Vuex Plugin brings PathStore's [API](../path-store/api/) to [Vuex](https://vuex.vuejs.org/).  
 
-This way you get a simplified overall Vuex development experience, while still having
+All methods from PathStore's API are registered as Vuex methods that trigger 
+equivalent generic **mutations**. This way you get a boilerplate-free Vuex development experience, while still having
 devtools monitoring.
+
+Since Vuex modules use the root Vuex state, you can use the PathStore Vuex Plugin methods to set/get the state
+of Vuex modules as well.
+
+You can use **all** Vuex features as before (getters/actions/mutations etc) or mix and match.
+
+## Vuex Methods
+
+Here's a quick list of the methods that are added to Vuex with the PathStore Vuex Plugin.  
+For more details you can refer to the [PathStore API section](../path-store/api/)
+
+| Method                                     | Short description                              | Mutation |                             
+|--------------------------------------------|------------------------------------------------|----------|
+| `set(path, value)` or `set(map)`           | Sets  a value                                  | set      |
+| `get(path)`                                | Gets a value                                   | get      |
+| `toggle(path)`                             | Toggles a value                                | toggle   |
+| `del(path)` or `del(array)`                | Works like the delete operator                 | del      |
+| `pop(path)`                                | Removes and returns last element of array      | pop      |
+| `push(path, value[, ...valueN])`           | Appends elements to the end of array           | push     |
+| `reverse(path)`                            | Reverses an array                              | reverse  |
+| `shift(path)`                              | Removes and returns first element of array     | shift    |
+| `sort(path[, compareFunction])`            | Sorts an array                                 | sort     |
+| `splice(path, index, [removeCount[, add]])`| Removes or replaces array elements             | splice   |
+| `unshift(path, value[, ...valueN])`        | Inserts elements to the beginning of array     | unshift  |
 
 ## Installation 
 
@@ -45,6 +68,7 @@ const store = new Vuex.Store({
     count: 0,
     message: ''
   },
+  // You can register mutations as usual
   mutations: {
     increment (state) {
       state.count++
