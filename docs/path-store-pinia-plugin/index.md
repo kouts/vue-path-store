@@ -1,4 +1,5 @@
-PathStore Pinia Plugin brings PathStore's [API](../path-store/api/) to [Pinia](https://pinia.esm.dev/).  
+##### PathStore Pinia Plugin brings PathStore's [API](../path-store/api/) to [Pinia](https://pinia.esm.dev/).  
+
 All methods from PathStore's API are registered as Pinia actions.
 
 This way you get a simplified overall Pinia development experience, while still having
@@ -32,11 +33,13 @@ import { pathStorePiniaPlugin } from 'vue-path-store/dist/es/pathStorePiniaPlugi
 PathStore Pinia Plugin is registered like any other Pinia plugin.
 
 ```js
-// mains.js
+// main.js
 import Vue from 'vue'
+import VueCompositionApi from '@vue/composition-api'
 import { PiniaPlugin, createPinia } from 'pinia'
 import { pathStorePiniaPlugin } from './modules/path_store/pathStorePiniaPlugin'
 
+Vue.use(VueCompositionApi)
 Vue.use(PiniaPlugin)
 
 const pinia = createPinia()
