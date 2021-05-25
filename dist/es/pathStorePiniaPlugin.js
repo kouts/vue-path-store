@@ -53,39 +53,6 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -219,26 +186,19 @@ var deleteMany = function deleteMany(obj, path) {
 
 var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
-var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
-  var methods = _objectSpread2({
+function createPathStoreMethods() {
+  return _objectSpread2({
     set: function set(path, value) {
-      store.commit('set', {
-        path: path,
-        value: value
-      });
+      setMany(this, path, value);
     },
     toggle: function toggle(path) {
-      store.commit('toggle', {
-        path: path
-      });
+      setOne(this, path, !getByPath(this, path));
     },
     get: function get(path) {
-      return path ? getByPath(store.state, path) : store.state;
+      return path ? getByPath(this, path) : this;
     },
     del: function del(path) {
-      store.commit('del', {
-        path: path
-      });
+      deleteMany(this, path);
     }
   }, ARRAY_METHODS.reduce(function (acc, method) {
     var fn = function fn() {
@@ -247,57 +207,21 @@ var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
       }
 
       var path = args.shift();
-      return store.commit(method, {
-        path: path,
-        args: args
-      });
-    };
-
-    return Object.assign(acc, _defineProperty({}, method, fn));
-  }, {}));
-
-  var mutations = _objectSpread2({
-    set: function set(state, info) {
-      var path = info.path,
-          value = info.value;
-      setMany(state, path, value);
-    },
-    toggle: function toggle(state, info) {
-      var path = info.path;
-      setOne(state, path, !getByPath(state, path));
-    },
-    del: function del(state, info) {
-      var path = info.path;
-      deleteMany(state, path);
-    }
-  }, ARRAY_METHODS.reduce(function (acc, method) {
-    var fn = function fn(state, info) {
-      var path = info.path,
-          args = info.args;
-      var arr = getByPath(state, path);
+      var arr = getByPath(this, path);
 
       if (!isArray(arr)) {
-        throw Error('Argument must be an array');
+        throw Error('Argument must be an array.');
       }
 
-      return arr[method].apply(arr, _toConsumableArray(args));
+      return arr[method].apply(arr, args);
     };
 
     return Object.assign(acc, _defineProperty({}, method, fn));
   }, {}));
+}
 
-  var _loop = function _loop(type) {
-    var entry = store._mutations[type] || (store._mutations[type] = []);
-    entry.push(function wrappedMutationHandler(payload) {
-      mutations[type].call(store, store.state, payload);
-    });
-  };
-
-  for (var type in mutations) {
-    _loop(type);
-  }
-
-  return Object.assign(store, methods);
+var pathStorePiniaPlugin = function pathStorePiniaPlugin(ctx) {
+  return Object.assign(ctx.store.actions = ctx.store.actions || {}, createPathStoreMethods());
 };
 
-export { pathStoreVuexPlugin };
+export { pathStorePiniaPlugin };

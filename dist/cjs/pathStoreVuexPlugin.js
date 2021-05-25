@@ -255,14 +255,14 @@ var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
       }
 
       var path = args.shift();
-      store.commit(method, {
+      return store.commit(method, {
         path: path,
         args: args
       });
     };
 
     return Object.assign(acc, _defineProperty({}, method, fn));
-  }));
+  }, {}));
 
   var mutations = _objectSpread2({
     set: function set(state, info) {
@@ -288,11 +288,11 @@ var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
         throw Error('Argument must be an array');
       }
 
-      arr[method].apply(arr, _toConsumableArray(args));
+      return arr[method].apply(arr, _toConsumableArray(args));
     };
 
     return Object.assign(acc, _defineProperty({}, method, fn));
-  }));
+  }, {}));
 
   var _loop = function _loop(type) {
     var entry = store._mutations[type] || (store._mutations[type] = []);
