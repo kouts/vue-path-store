@@ -1,3 +1,10 @@
+# [2.1.0](https://github.com/kouts/vue-path-store/compare/v2.0.1...v2.1.0) (2021-05-25)
+
+
+### Features
+
+* added pinia plugin ([def484c](https://github.com/kouts/vue-path-store/commit/def484c3facea9640727759660e79420ee2d20e1))
+
 ## [2.0.1](https://github.com/kouts/vue-path-store/compare/v2.0.0...v2.0.1) (2021-05-17)
 
 
