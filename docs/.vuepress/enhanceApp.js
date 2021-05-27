@@ -1,5 +1,7 @@
 import './styles/styles.scss'
+import Vuex from 'vuex'
 import { createPathStore } from '../../src/pathStore.js'
+import { store } from './vuex-store'
 
 export default ({
   Vue, // the version of Vue being used in the VuePress app
@@ -9,8 +11,10 @@ export default ({
 }) => {
   if (typeof process === 'undefined') {
     // process is undefined in a browser
+    Vue.use(Vuex)
     Vue.prototype.$s = createPathStore({
       state: {}
     })
+    Vue.mixin({store: store})
   }
 }
