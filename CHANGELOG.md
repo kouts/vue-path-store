@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/kouts/vue-path-store/compare/v2.1.0...v2.1.1) (2021-05-27)
+
+
+### Bug Fixes
+
+* updated docs ([b8b642c](https://github.com/kouts/vue-path-store/commit/b8b642c3a45508484573f824f2f394ede1b3cfe4))
+
 # [2.1.0](https://github.com/kouts/vue-path-store/compare/v2.0.1...v2.1.0) (2021-05-25)
 
 
