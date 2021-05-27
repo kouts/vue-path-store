@@ -7,10 +7,10 @@ At its heart lays a simple reactive store, which uses the dot notation path synt
 
 It also comes with:
 
-- a **[Vuex](https://vuex.vuejs.org/) plugin** so that you can use dot notation along with the
+- a **[Vuex plugin](./path-store-vuex-plugin/)** so that you can use dot notation along with the
 full power of Vuex (actions, getters, modules, devtools) as well.
 
-- a **[Pinia](https://pinia.esm.dev/) plugin** so that you can use dot notation with your favorite fruity store.
+- a **[Pinia plugin](./path-store-pinia-plugin/)** so that you can use dot notation with your favorite fruity store.
 
 ## Features
 - Share state easily between components using either the object or composition API
@@ -18,8 +18,8 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 - Creates intermediate reactive object/array structures if not available while setting state
 - Avoid Vue [change detection caveats](https://vuejs.org/v2/guide/reactivity.html#Change-Detection-Caveats)
 - Extra methods for `Array` manipulation
-- Enhance Vuex with dot notation by utilizing the PathStore Vuex Plugin
-- Enhance Pinia with dot notation by utilizing the PathStore Pinia Plugin
+- Enhance Vuex with dot notation by utilizing the [PathStore Vuex Plugin](./path-store-vuex-plugin/)
+- Enhance Pinia with dot notation by utilizing the [PathStore Pinia Plugin](./path-store-pinia-plugin/)
 
 ## Browsers support
 
