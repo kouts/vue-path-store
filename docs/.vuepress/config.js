@@ -24,7 +24,7 @@ module.exports = {
       },
       ['/path-store-vuex-plugin/', 'PathStore Vuex Plugin'],
       ['/path-store-pinia-plugin/', 'PathStore Pinia Plugin'],
-      // ['/examples', 'Examples']
+      ['/examples/', 'Examples']
     ]
   },
   head: [
