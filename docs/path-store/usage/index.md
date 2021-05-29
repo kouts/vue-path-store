@@ -23,8 +23,6 @@ Using it inside components
 <template>
   <div>
     {{ $s.state.message }}
-  </div>
-  <div>
     <button @click="$s.set('state.message', 'New message')">
       Set message
     </button>
@@ -50,10 +48,8 @@ Import it inside components
 ```vue
 <template>
   <div>
-    {{ $s.state.message }}
-  </div>
-  <div>
-    <button @click="$s.set('state.message', 'New message')">
+    {{ store.state.message }}
+    <button @click="store.set('state.message', 'New message')">
       Set message
     </button>
   </div>
@@ -63,9 +59,11 @@ Import it inside components
 import { store } from './store.js'
 
 export default {
-  computed: {
-    $s: () => store
-  }
+  data() {
+    return {
+      store
+    }
+  } 
 }
 </script>
 
@@ -98,10 +96,8 @@ Import it inside components
 ```vue
 <template>
   <div>
-    {{ $s.state.message }}
-  </div>
-  <div>
-    <button @click="$s.set('state.message', 'New message')">
+    {{ store.state.message }}
+    <button @click="store.set('state.message', 'New message')">
       Set message
     </button>
   </div>
@@ -112,10 +108,10 @@ import { useStore } from './useStore.js'
 
 export default {
   setup() {
-    const $s = useStore()
+    const store = useStore()
 
     return {
-      $s
+      store
     }
   }
 }

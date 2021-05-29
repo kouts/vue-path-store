@@ -70,8 +70,6 @@ Using it inside components
 <template>
   <div>
     {{ $store.message }}
-  </div>
-  <div>
     <button @click="$store.set('message', 'New message')">
       Set message
     </button>

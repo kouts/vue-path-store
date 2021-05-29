@@ -1,3 +1,7 @@
+::: tip  
+`$s` is used throughout the examples to represent an initialized PathStore instance. 
+:::
+
 ## set
 
 Sets one or many a reactive properties by using either `path, value` or a map of `path: value` pairs.
