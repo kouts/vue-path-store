@@ -1,13 +1,13 @@
 ##### PathStore Vuex Plugin brings PathStore's [API](../path-store/api/) to [Vuex](https://vuex.vuejs.org/).  
 
 All methods from PathStore's API are registered as Vuex methods that trigger 
-equivalent generic **mutations**. This way you get a boilerplate-free Vuex development experience, while still having
-devtools monitoring.
+equivalent **generic mutations**. This way you get a reduced boilerplate Vuex development experience, while still having
+full visibility of Vuex mutations history in Vue Devtools.
 
-Since Vuex modules use the root Vuex state, you can use the PathStore Vuex Plugin methods to set/get the state
-of Vuex modules as well.
+Since Vuex modules use the root Vuex state, you can use PathStore Vuex Plugin's methods to set/get the state
+of **Vuex modules** as well.
 
-You can use **all** Vuex features as before (getters/actions/mutations etc) or mix and match.
+You can use **all** Vuex features as before (getters/actions/mutations etc) along with PathStore Vuex Plugin's methods.
 
 ## Vuex Methods
 
