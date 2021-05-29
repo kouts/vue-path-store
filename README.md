@@ -12,7 +12,7 @@ full power of Vuex (actions, getters, modules, devtools) as well.
 
 ## Features
 
-- Lightweight, minified gzip size is < 1.5kb
+- Lightweight, minified gzip size is < **1.5kb**
 - Share state easily between components using either the object or composition API
 - Use dot (or bracket) notation for mutating state (set, delete)
 - Creates intermediate reactive object/array structures if not available while setting state
