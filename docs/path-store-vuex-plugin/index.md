@@ -17,7 +17,7 @@ For more details you can refer to the [PathStore API section](../path-store/api/
 | Method                                     | Short description                              | Mutation |                             
 |--------------------------------------------|------------------------------------------------|----------|
 | `set(path, value)` or `set(map)`           | Sets one or multiple values                    | set      |
-| `get(path)`                                | Retrieves a value                               | get      |
+| `get(path)`                                | Retrieves a value                              | get      |
 | `toggle(path)`                             | Toggles a value to true/false                  | toggle   |
 | `del(path)` or `del(array)`                | Deletes one or multiple properties             | del      |
 | `pop(path)`                                | Removes and returns last element of array      | pop      |
