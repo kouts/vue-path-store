@@ -36,7 +36,7 @@ import Vue from 'vue'
 import { createPathStore } from 'vue-path-store'
 
 // Initialize the store and provide it to all components
-Vue.prototype.$s = createPathStore({
+Vue.prototype.$ps = createPathStore({
   state: {}
 })
 

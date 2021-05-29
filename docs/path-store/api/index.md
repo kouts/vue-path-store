@@ -1,5 +1,5 @@
 ::: tip  
-`$s` is used throughout the examples to represent an initialized PathStore instance. 
+`$ps` is used throughout the examples to represent an initialized PathStore instance. 
 :::
 
 ## set
@@ -25,12 +25,12 @@ and that view updates are triggered.
 
 ### Example
 ```js
-$s.set('state.bar.baz', 'New value')
+$ps.set('state.bar.baz', 'New value')
 // This will set state.bar.baz to 'New value'
 // If intermediate objects don't exist 
 // they will get automatically created
 
-$s.set({
+$ps.set({
   'state.bar.baz', 'New value',
   'state.qux': 'Another value'
 })
@@ -66,15 +66,15 @@ Assuming the data inside store is
 }
 */
 
-$s.get('state.bar')
+$ps.get('state.bar')
 // Will return 'baz'
 
-$s.get('arr[1]')
+$ps.get('arr[1]')
 // or
-$s.get('arr.1')
+$ps.get('arr.1')
 // Will return 'test2'
 
-$s.get('foo.qux')
+$ps.get('foo.qux')
 // Will return undefined
 ```
 
@@ -101,7 +101,7 @@ Assuming the data inside store is
   }
 }
 */
-$s.toggle('state.bar')
+$ps.toggle('state.bar')
 // This will set state.bar to true
 ```
 
@@ -124,10 +124,10 @@ Deletes one or many object properties or array elements by using either `path, v
 
 ### Example
 ```js
-$s.del('state.bar.baz')
+$ps.del('state.bar.baz')
 // This will delete the state.bar.baz property
 
-$s.del('state.bar.baz', 'state.qux'])
+$ps.del('state.bar.baz', 'state.qux'])
 // Delete multiple properties by using an array of paths
 ```
 
@@ -157,7 +157,7 @@ Assuming the data inside store is
 }
 */
 
-const removed = $s.pop('arr')
+const removed = $ps.pop('arr')
 // This will remove the element element of the array.
 // removed will now be 'test2'
 ```
@@ -189,7 +189,7 @@ Assuming the data inside store is
 }
 */
 
-$s.push('arr', 'test3', 'test4')
+$ps.push('arr', 'test3', 'test4')
 // This will append 'test3' and 'test4' to the arr array.
 // arr will now be ['test1', 'test2', 'test3', 'test4']
 ```
@@ -220,7 +220,7 @@ Assuming the data inside store is
 }
 */
 
-$s.reverse('arr')
+$ps.reverse('arr')
 // arr will now be ['test3', 'test2', 'test1']
 ```
 
@@ -250,7 +250,7 @@ Assuming the data inside store is
 }
 */
 
-const removed = $s.shift('arr')
+const removed = $ps.shift('arr')
 // This will remove the first element from the array.
 // removed will now be 'test1'
 ```
@@ -282,7 +282,7 @@ Assuming the data inside store is
 }
 */
 
-$s.sort('arr')
+$ps.sort('arr')
 // arr will now be ['a', 'b', 'c', 'd', 'f']
 ```
 
@@ -318,7 +318,7 @@ Assuming the data inside store is
 }
 */
 
-const removed = $s.splice('arr', 0, 1)
+const removed = $ps.splice('arr', 0, 1)
 // arr will now be ['test2', 'test3']
 // removed will be ['test1']
 ```
@@ -350,6 +350,6 @@ Assuming the data inside store is
 }
 */
 
-$s.unshift('arr', 'test1', 'test2')
+$ps.unshift('arr', 'test1', 'test2')
 // arr will now be ['test1', 'test2', 'test3', 'test4']
 ```

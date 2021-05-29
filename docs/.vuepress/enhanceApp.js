@@ -12,7 +12,7 @@ export default ({
   if (typeof process === 'undefined') {
     // process is undefined in a browser
     Vue.use(Vuex)
-    Vue.prototype.$s = createPathStore({
+    Vue.prototype.$ps = createPathStore({
       state: {}
     })
     Vue.mixin({store: store})
