@@ -11,7 +11,7 @@ import Vue from 'vue'
 import { createPathStore } from 'vue-path-store'
 
 // Initialize the store and provide it to all components
-Vue.prototype.$s = createPathStore({
+Vue.prototype.$ps = createPathStore({
   state: {
     message: 'Hello world'
   }
@@ -22,8 +22,8 @@ Using it inside components
 ```vue
 <template>
   <div>
-    {{ $s.state.message }}
-    <button @click="$s.set('state.message', 'New message')">
+    {{ $ps.state.message }}
+    <button @click="$ps.set('state.message', 'New message')">
       Set message
     </button>
   </div>
