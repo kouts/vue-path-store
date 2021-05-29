@@ -16,10 +16,10 @@ For more details you can refer to the [PathStore API section](../path-store/api/
 
 | Method                                     | Short description                              | Mutation |                             
 |--------------------------------------------|------------------------------------------------|----------|
-| `set(path, value)` or `set(map)`           | Sets  a value                                  | set      |
-| `get(path)`                                | Gets a value                                   | get      |
-| `toggle(path)`                             | Toggles a value                                | toggle   |
-| `del(path)` or `del(array)`                | Works like the delete operator                 | del      |
+| `set(path, value)` or `set(map)`           | Sets one or multiple values                    | set      |
+| `get(path)`                                | Retrives a value                               | get      |
+| `toggle(path)`                             | Toggles a value to true/false                  | toggle   |
+| `del(path)` or `del(array)`                | Deletes one or multiple properties             | del      |
 | `pop(path)`                                | Removes and returns last element of array      | pop      |
 | `push(path, value[, ...valueN])`           | Appends elements to the end of array           | push     |
 | `reverse(path)`                            | Reverses an array                              | reverse  |
@@ -87,8 +87,6 @@ Using it inside components
 <template>
   <div>
     {{ $store.state.message }}
-  </div>
-  <div>
     <button @click="$store.set('message', 'New message')">
       Set message
     </button>
