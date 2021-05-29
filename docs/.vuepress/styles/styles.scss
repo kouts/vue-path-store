@@ -96,3 +96,9 @@ h3, .h3 {
 .theme-default-content:not(.custom) > h2:first-child + p {
   margin-top: 0 !important;
 }
+
+/* Custom containers fix */
+.custom-block .custom-block-title {
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
