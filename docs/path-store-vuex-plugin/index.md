@@ -14,19 +14,19 @@ You can use **all** Vuex features as before (getters/actions/mutations etc) alon
 Here's a quick list of the methods that are added to Vuex with the PathStore Vuex Plugin.  
 For more details you can refer to the [PathStore API section](../path-store/api/)
 
-| Method                                     | Short description                              | Mutation |                             
-|--------------------------------------------|------------------------------------------------|----------|
-| `set(path, value)` or `set(map)`           | Sets one or multiple values                    | set      |
-| `get(path)`                                | Retrieves a value                               | get      |
-| `toggle(path)`                             | Toggles a value to true/false                  | toggle   |
-| `del(path)` or `del(array)`                | Deletes one or multiple properties             | del      |
-| `pop(path)`                                | Removes and returns last element of array      | pop      |
-| `push(path, value[, ...valueN])`           | Appends elements to the end of array           | push     |
-| `reverse(path)`                            | Reverses an array                              | reverse  |
-| `shift(path)`                              | Removes and returns first element of array     | shift    |
-| `sort(path[, compareFunction])`            | Sorts an array                                 | sort     |
-| `splice(path, index, [removeCount[, add]])`| Removes or replaces array elements             | splice   |
-| `unshift(path, value[, ...valueN])`        | Inserts elements to the beginning of array     | unshift  |
+| Method                                     | Short description                                | Mutation |
+|--------------------------------------------|--------------------------------------------------|----------|
+| `set(path, value)` or `set(map)`           | Sets one or multiple values                      | set      |
+| `get(path)`                                | Retrieves a value                                | get      |
+| `toggle(path)`                             | Toggles a value to true/false                    | toggle   |
+| `del(path)` or `del(array)`                | Deletes one or multiple properties               | del      |
+| `pop(path)`                                | Removes and returns the last element of an array | pop      |
+| `push(path, value[, ...valueN])`           | Appends elements to the end of an array          | push     |
+| `reverse(path)`                            | Reverses an array                                | reverse  |
+| `shift(path)`                              | Removes and returns the first element of an array| shift    |
+| `sort(path[, compareFunction])`            | Sorts an array                                   | sort     |
+| `splice(path, index, [removeCount[, add]])`| Removes or replaces array elements               | splice   |
+| `unshift(path, value[, ...valueN])`        | Inserts elements to the beginning of an array    | unshift  |
 
 ## Installation 
 
