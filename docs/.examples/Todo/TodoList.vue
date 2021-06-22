@@ -44,9 +44,7 @@
         delete
       </div>
     </div>
-    <div v-if="!$store.state.todos.length" class="text-center">
-      No todos
-    </div>
+    <div v-if="!$store.state.todos.length" class="text-center">No todos</div>
   </div>
 </template>
 

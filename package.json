@@ -29,7 +29,8 @@
     "docs:build": "vuepress build docs",
     "build": "rollup -c",
     "lint": "eslint . --ext .js,.vue",
-    "lint-fix": "eslint . --fix --ext .js,.vue"
+    "lint-fix": "eslint . --fix --ext .js,.vue",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "vue": "^2.6.12"

@@ -128,5 +128,4 @@ describe('pathStorePiniaPlugin', () => {
     await waitNT(wrapper.vm)
     expect(dataOf(wrapper)).toEqual([1, 2, 3, 4])
   })
-
 })

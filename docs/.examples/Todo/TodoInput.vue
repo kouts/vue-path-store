@@ -6,11 +6,14 @@
         v-model="todo"
         type="text"
         class="form-control"
-        @keyup.enter="$store.push('todos', {
-          description: todo,
-          active: false,
-          completed: false
-        }); todo = ''"
+        @keyup.enter="
+          $store.push('todos', {
+            description: todo,
+            active: false,
+            completed: false
+          })
+          todo = ''
+        "
       />
     </div>
     <div class="card-footer">
@@ -20,9 +23,7 @@
       <template v-if="todosNumber && !itemsLeft">
         All todos completed
       </template>
-      <template v-if="!todosNumber">
-        Add a todo
-      </template>      
+      <template v-if="!todosNumber"> Add a todo </template>
     </div>
   </div>
 </template>
@@ -36,7 +37,7 @@ export default {
   },
   computed: {
     itemsLeft() {
-      return this.$store.get('todos').filter(item => !item.completed).length
+      return this.$store.get('todos').filter((item) => !item.completed).length
     },
     todosNumber() {
       return this.$store.get('todos').length
