@@ -15,6 +15,6 @@ export default ({
     Vue.prototype.$ps = createPathStore({
       state: {}
     })
-    Vue.mixin({store: store})
+    Vue.mixin({ store: store })
   }
 }

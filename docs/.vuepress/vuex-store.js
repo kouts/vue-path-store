@@ -22,7 +22,7 @@ export const store = new Vuex.Store({
         description: 'Todo 3',
         active: false,
         completed: false
-      }            
+      }
     ]
   }
 })
