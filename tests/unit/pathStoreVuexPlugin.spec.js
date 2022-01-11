@@ -1,5 +1,6 @@
 import { waitNT, dataOf } from '../utils'
 import { createLocalVue, mount, enableAutoDestroy } from '@vue/test-utils'
+import { ARRAY_METHODS } from '@/constants'
 import Vuex from 'vuex'
 import { pathStoreVuexPlugin } from '@/pathStoreVuexPlugin'
 
@@ -112,5 +113,48 @@ describe('pathStoreVuexPlugin', () => {
     wrapper.vm.$store.unshift('data', 1, 2)
     await waitNT(wrapper.vm)
     expect(dataOf(wrapper)).toEqual([1, 2, 3, 4])
+  })
+
+  it('toggles a value on the given path', async () => {
+    wrapper.vm.$store.set('data', true)
+    wrapper.vm.$store.toggle('data')
+    await waitNT(wrapper.vm)
+    expect(dataOf(wrapper)).toEqual(false)
+  })
+
+  it('gets a value on the given path', async () => {
+    const obj = { foo: { bar: { baz: 'test' } } }
+    wrapper.vm.$store.set('data', obj)
+    const res = wrapper.vm.$store.get('data.foo')
+    await waitNT(wrapper.vm)
+
+    expect(res).toEqual(obj.foo)
+  })
+
+  it('returns the whole object when no path is given', async () => {
+    const obj = { foo: { bar: { baz: 'test' } } }
+    wrapper.vm.$store.set('data', obj)
+    const res = wrapper.vm.$store.get()
+    await waitNT(wrapper.vm)
+
+    expect(res).toEqual({ data: obj })
+  })
+
+  it('deletes the value on the given path', async () => {
+    const obj = { foo: { bar: { baz: 'test' } } }
+    wrapper.vm.$store.set('data', obj)
+    wrapper.vm.$store.del('data.foo.bar')
+    await waitNT(wrapper.vm)
+
+    expect(dataOf(wrapper)).toEqual({ foo: {} })
+  })
+
+  it.each(ARRAY_METHODS)('should throw an error when the %s method is not called with an array argument', async (method) => {
+    const test = () => {
+      wrapper.vm.$store[method]('test')
+    }
+    await waitNT(wrapper.vm)
+
+    expect(test).toThrow('Argument must be an array.')
   })
 })

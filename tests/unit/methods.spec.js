@@ -2,7 +2,7 @@ import { createPathStoreMethods } from '@/methods.js'
 import { ARRAY_METHODS } from '@/constants'
 
 describe('methods', () => {
-  it.each(ARRAY_METHODS)('should fail when an the %s method is not called with an array argument', (method) => {
+  it.each(ARRAY_METHODS)('should fail when the %s method is not called with an array argument', (method) => {
     const methods = createPathStoreMethods()
     const test = () => {
       methods[method]('test')

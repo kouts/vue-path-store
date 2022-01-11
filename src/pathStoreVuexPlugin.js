@@ -43,7 +43,7 @@ const pathStoreVuexPlugin = (store) => {
         const { path, args } = info
         const arr = getByPath(state, path)
         if (!isArray(arr)) {
-          throw Error('Argument must be an array')
+          throw Error('Argument must be an array.')
         }
         return arr[method](...args)
       }
