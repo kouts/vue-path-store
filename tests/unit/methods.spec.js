@@ -27,4 +27,44 @@ describe('methods', () => {
 
     expect(methods.arr).toEqual(expectedRes)
   })
+
+  it('sets a value on the given path', () => {
+    const methods = createPathStoreMethods()
+    methods.state = { key: 'value' }
+    methods.set('state.key', 'value test')
+
+    expect(methods.state).toEqual({ key: 'value test' })
+  })
+
+  it('toggles a value on the given path', () => {
+    const methods = createPathStoreMethods()
+    methods.state = { key: true }
+    methods.toggle('state.key')
+
+    expect(methods.state).toEqual({ key: false })
+  })
+
+  it('gets a value on the given path', () => {
+    const methods = createPathStoreMethods()
+    methods.state = { key: { sub: 'value' } }
+    const res = methods.get('state.key.sub')
+
+    expect(res).toEqual('value')
+  })
+
+  it('returns the whole object when no path is given', () => {
+    const methods = createPathStoreMethods()
+    methods.state = { key: { sub: 'value' } }
+    const res = methods.get()
+
+    expect(res).toEqual(methods)
+  })
+
+  it('deletes the value on the given path', () => {
+    const methods = createPathStoreMethods()
+    methods.state = { key: { sub: 'value' } }
+    methods.del('state.key.sub')
+
+    expect(methods.state).toEqual({ key: {} })
+  })
 })
