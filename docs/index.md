@@ -2,6 +2,13 @@
   <img src="vue-path-store.png" alt="Vue PathStore" width="420" />
 </div>
 
+<div class="text-center mb-3">
+  <a href="https://npm.im/vue-path-store"><img src="https://badgen.net/npm/v/vue-path-store"></a> 
+  <img src="https://img.badgesize.io/kouts/vue-path-store/main/dist/umd/pathStore.min.js.svg" />
+  <img src="https://img.badgesize.io/kouts/vue-path-store/main/dist/umd/pathStore.min.js.svg?compression=gzip" />
+  <img src="../coverage/badge.svg" />
+</div>
+
 **PathStore** is a simple, lightweight, **shared** state management solution for Vue.  
 At its heart lays a simple reactive store, which uses the dot notation path syntax for data mutation.  
 
