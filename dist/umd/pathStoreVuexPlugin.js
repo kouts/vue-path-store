@@ -285,7 +285,7 @@
         var arr = getByPath(state, path);
 
         if (!isArray(arr)) {
-          throw Error('Argument must be an array');
+          throw Error('Argument must be an array.');
         }
 
         return arr[method].apply(arr, _toConsumableArray(args));

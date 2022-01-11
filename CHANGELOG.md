@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/kouts/vue-path-store/compare/v2.1.1...v2.1.2) (2022-01-11)
+
+
+### Bug Fixes
+
+* added test coverage ([fe52931](https://github.com/kouts/vue-path-store/commit/fe529311693f137505ed7b77d8095314ea4271fc))
+
 ## [2.1.1](https://github.com/kouts/vue-path-store/compare/v2.1.0...v2.1.1) (2021-05-27)
 
 
