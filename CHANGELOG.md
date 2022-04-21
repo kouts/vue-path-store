@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/kouts/vue-path-store/compare/v2.1.2...v2.1.3) (2022-04-21)
+
+
+### Bug Fixes
+
+* updated npm packages ([d70ab22](https://github.com/kouts/vue-path-store/commit/d70ab22e332113749a2b8b2f5aa1ec69bee5db4d))
+
 ## [2.1.2](https://github.com/kouts/vue-path-store/compare/v2.1.1...v2.1.2) (2022-01-11)
 
 
