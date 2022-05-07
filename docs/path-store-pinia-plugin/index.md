@@ -1,34 +1,36 @@
-##### PathStore Pinia Plugin brings PathStore's [API](../path-store/api/) to [Pinia](https://pinia.esm.dev/).  
+##### PathStore Pinia Plugin brings PathStore's [API](../path-store/api/) to [Pinia](https://pinia.esm.dev/).
 
 All methods from PathStore's API are registered as Pinia actions.
 
 This way you get a simplified overall Pinia development experience, while still having
 basic devtools monitoring.
 
-## Installation 
+## Installation
 
 ### Basic
 
-Download the repo, extract ```pathStorePiniaPlugin.min.js``` out of the ```dist/umd``` folder
+Download the repo, extract `pathStorePiniaPlugin.min.js` out of the `dist/umd` folder
 and insert it in your page.
 
-``` html
+```html
 <script type="text/javascript" src="pathStorePiniaPlugin.min.js"></script>
 ```
 
 ### Module System
 
 Install it via npm
+
 ```sh
 npm i vue-path-store
 ```
 
-Use the ```import``` statement to include it into your js
-``` js
+Use the `import` statement to include it into your js
+
+```js
 import { pathStorePiniaPlugin } from 'vue-path-store/dist/es/pathStorePiniaPlugin.js'
 ```
 
-## Usage 
+## Usage
 
 PathStore Pinia Plugin is registered like any other Pinia plugin.
 
@@ -36,11 +38,11 @@ PathStore Pinia Plugin is registered like any other Pinia plugin.
 // main.js
 import Vue from 'vue'
 import VueCompositionApi from '@vue/composition-api'
-import { PiniaPlugin, createPinia } from 'pinia'
+import { PiniaVuePlugin, createPinia } from 'pinia'
 import { pathStorePiniaPlugin } from './modules/path_store/pathStorePiniaPlugin'
 
 Vue.use(VueCompositionApi)
-Vue.use(PiniaPlugin)
+Vue.use(PiniaVuePlugin)
 
 const pinia = createPinia()
 pinia.use(pathStorePiniaPlugin)
@@ -66,13 +68,12 @@ export const usePiniaStore = defineStore({
 ```
 
 Using it inside components
+
 ```vue
 <template>
   <div>
     {{ $store.message }}
-    <button @click="$store.set('message', 'New message')">
-      Set message
-    </button>
+    <button @click="$store.set('message', 'New message')">Set message</button>
   </div>
 </template>
 
@@ -89,5 +90,4 @@ export default {
   }
 }
 </script>
-
 ```
