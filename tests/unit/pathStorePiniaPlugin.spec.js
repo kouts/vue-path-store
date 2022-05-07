@@ -1,16 +1,18 @@
-import { waitNT, dataOf } from '../utils'
 import VueCompositionApi from '@vue/composition-api'
-import { createLocalVue, mount, enableAutoDestroy } from '@vue/test-utils'
-import { PiniaPlugin, defineStore, createPinia, mapStores } from 'pinia'
+import { PiniaVuePlugin, createPinia, defineStore, mapStores } from 'pinia'
+import { createLocalVue, enableAutoDestroy, mount } from '@vue/test-utils'
+import { dataOf, waitNT } from '../utils'
 import { pathStorePiniaPlugin } from '@/pathStorePiniaPlugin'
 
 enableAutoDestroy(afterEach)
 
 const localVue = createLocalVue()
+
 localVue.use(VueCompositionApi)
-localVue.use(PiniaPlugin)
+localVue.use(PiniaVuePlugin)
 
 const pinia = createPinia()
+
 pinia.use(pathStorePiniaPlugin)
 
 const createTestComponent = (useTestStore) => ({
@@ -34,6 +36,7 @@ describe('pathStorePiniaPlugin', () => {
       }
     })
     const TestComponent = createTestComponent(useTestStore)
+
     wrapper = mount(TestComponent, { pinia, localVue })
   })
 
@@ -52,6 +55,7 @@ describe('pathStorePiniaPlugin', () => {
         }
       }
     }
+
     wrapper.vm.testStore.set('data', obj)
     await waitNT(wrapper.vm)
     expect(dataOf(wrapper)).toEqual(obj)
@@ -66,15 +70,18 @@ describe('pathStorePiniaPlugin', () => {
         }
       }
     }
+
     wrapper.vm.testStore.set('data', obj)
     wrapper.vm.testStore.set('data.bar.str', 'Updated')
     await waitNT(wrapper.vm)
     const data = dataOf(wrapper)
+
     expect(data.bar.str).toBe('Updated')
   })
 
   it('pops an array element', async () => {
     const arr = [1, 2, 3, 4]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.pop('data')
     await waitNT(wrapper.vm)
@@ -83,6 +90,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('pushes an element into an array', async () => {
     const arr = [1, 2, 3]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.push('data', 4)
     await waitNT(wrapper.vm)
@@ -91,6 +99,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('reverses an an array', async () => {
     const arr = [1, 2, 3]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.reverse('data')
     await waitNT(wrapper.vm)
@@ -99,6 +108,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('removes the first element of an array', async () => {
     const arr = [1, 2, 3, 4]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.shift('data')
     await waitNT(wrapper.vm)
@@ -107,6 +117,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('sorts an array', async () => {
     const arr = [2, 4, 1, 3]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.sort('data')
     await waitNT(wrapper.vm)
@@ -115,6 +126,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('splices an array', async () => {
     const arr = [1, 2, 3, 4]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.splice('data', 0, 2)
     await waitNT(wrapper.vm)
@@ -123,6 +135,7 @@ describe('pathStorePiniaPlugin', () => {
 
   it('adds elements to the beginning of an array', async () => {
     const arr = [3, 4]
+
     wrapper.vm.testStore.set('data', arr)
     wrapper.vm.testStore.unshift('data', 1, 2)
     await waitNT(wrapper.vm)

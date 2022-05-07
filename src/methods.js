@@ -1,6 +1,6 @@
-import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
-import { setOne, setMany, deleteMany } from 'vue-set-path'
 import { ARRAY_METHODS } from './constants.js'
+import { deleteMany, setMany, setOne } from 'vue-set-path'
+import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
 
 export function createPathStoreMethods() {
   return {
@@ -20,11 +20,14 @@ export function createPathStoreMethods() {
       const fn = function (...args) {
         const path = args.shift()
         const arr = getByPath(this, path)
+
         if (!isArray(arr)) {
           throw Error('Argument must be an array.')
         }
+
         return arr[method](...args)
       }
+
       return Object.assign(acc, { [method]: fn })
     }, {})
   }
