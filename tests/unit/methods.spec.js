@@ -1,5 +1,5 @@
-import { createPathStoreMethods } from '@/methods.js'
 import { ARRAY_METHODS } from '@/constants'
+import { createPathStoreMethods } from '@/methods.js'
 
 describe('methods', () => {
   it.each(ARRAY_METHODS)('should fail when the %s method is not called with an array argument', (method) => {
@@ -7,11 +7,13 @@ describe('methods', () => {
     const test = () => {
       methods[method]('test')
     }
+
     expect(test).toThrow('Argument must be an array.')
   })
 
   it.each(ARRAY_METHODS)('should call the %s method on the array', (method) => {
     const methods = createPathStoreMethods()
+
     methods.arr = [1, 2, 3]
     const arr = [1, 2, 3]
     let expectedRes = []
@@ -30,6 +32,7 @@ describe('methods', () => {
 
   it('sets a value on the given path', () => {
     const methods = createPathStoreMethods()
+
     methods.state = { key: 'value' }
     methods.set('state.key', 'value test')
 
@@ -38,6 +41,7 @@ describe('methods', () => {
 
   it('toggles a value on the given path', () => {
     const methods = createPathStoreMethods()
+
     methods.state = { key: true }
     methods.toggle('state.key')
 
@@ -46,6 +50,7 @@ describe('methods', () => {
 
   it('gets a value on the given path', () => {
     const methods = createPathStoreMethods()
+
     methods.state = { key: { sub: 'value' } }
     const res = methods.get('state.key.sub')
 
@@ -54,6 +59,7 @@ describe('methods', () => {
 
   it('returns the whole object when no path is given', () => {
     const methods = createPathStoreMethods()
+
     methods.state = { key: { sub: 'value' } }
     const res = methods.get()
 
@@ -62,6 +68,7 @@ describe('methods', () => {
 
   it('deletes the value on the given path', () => {
     const methods = createPathStoreMethods()
+
     methods.state = { key: { sub: 'value' } }
     methods.del('state.key.sub')
 

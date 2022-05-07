@@ -72,6 +72,7 @@ export default {
       }
       const inactiveTodos = this.$store.get('todos').map((item) => {
         item.active = false
+
         return item
       })
 
