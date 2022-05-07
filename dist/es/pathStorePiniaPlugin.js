@@ -41,6 +41,8 @@ function _defineProperty(obj, key, value) {
   return obj;
 }
 
+var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -165,8 +167,6 @@ var deleteMany = function deleteMany(obj, path) {
     throw Error('Arguments must be either string or array.');
   }
 };
-
-var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
 function createPathStoreMethods() {
   return _objectSpread2({

@@ -82,6 +82,8 @@ function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
 }
 
+var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+
 function _typeof(obj) {
   "@babel/helpers - typeof";
 
@@ -206,8 +208,6 @@ var deleteMany = function deleteMany(obj, path) {
     throw Error('Arguments must be either string or array.');
   }
 };
-
-var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
 var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
   var methods = _objectSpread2({
