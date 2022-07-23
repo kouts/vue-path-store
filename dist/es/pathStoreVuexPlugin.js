@@ -1,80 +1,6 @@
 import Vue from 'vue';
 
-function ownKeys(object, enumerableOnly) {
-  var keys = Object.keys(object);
-
-  if (Object.getOwnPropertySymbols) {
-    var symbols = Object.getOwnPropertySymbols(object);
-    enumerableOnly && (symbols = symbols.filter(function (sym) {
-      return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-    })), keys.push.apply(keys, symbols);
-  }
-
-  return keys;
-}
-
-function _objectSpread2(target) {
-  for (var i = 1; i < arguments.length; i++) {
-    var source = null != arguments[i] ? arguments[i] : {};
-    i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-      _defineProperty(target, key, source[key]);
-    }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-      Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-    });
-  }
-
-  return target;
-}
-
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-
-  return obj;
-}
-
-function _toConsumableArray(arr) {
-  return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
-}
-
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return _arrayLikeToArray(arr);
-}
-
-function _iterableToArray(iter) {
-  if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter);
-}
-
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return _arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen);
-}
-
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-
-  for (var i = 0, arr2 = new Array(len); i < len; i++) arr2[i] = arr[i];
-
-  return arr2;
-}
-
-function _nonIterableSpread() {
-  throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-
-var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+const ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
 function _typeof(obj) {
   "@babel/helpers - typeof";
@@ -201,82 +127,94 @@ var deleteMany = function deleteMany(obj, path) {
   }
 };
 
-var pathStoreVuexPlugin = function pathStoreVuexPlugin(store) {
-  var methods = _objectSpread2({
-    set: function set(path, value) {
+const pathStoreVuexPlugin = store => {
+  const methods = {
+    set(path, value) {
       store.commit('set', {
-        path: path,
-        value: value
+        path,
+        value
       });
     },
-    toggle: function toggle(path) {
+
+    toggle(path) {
       store.commit('toggle', {
-        path: path
+        path
       });
     },
-    get: function get(path) {
+
+    get(path) {
       return path ? getByPath(store.state, path) : store.state;
     },
-    del: function del(path) {
+
+    del(path) {
       store.commit('del', {
-        path: path
+        path
       });
-    }
-  }, ARRAY_METHODS.reduce(function (acc, method) {
-    var fn = function fn() {
-      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-        args[_key] = arguments[_key];
-      }
+    },
 
-      var path = args.shift();
-      return store.commit(method, {
-        path: path,
-        args: args
+    ...ARRAY_METHODS.reduce((acc, method) => {
+      const fn = (...args) => {
+        const path = args.shift();
+        return store.commit(method, {
+          path,
+          args
+        });
+      };
+
+      return Object.assign(acc, {
+        [method]: fn
       });
-    };
-
-    return Object.assign(acc, _defineProperty({}, method, fn));
-  }, {}));
-
-  var mutations = _objectSpread2({
-    set: function set(state, info) {
-      var path = info.path,
-          value = info.value;
+    }, {})
+  };
+  const mutations = {
+    set(state, info) {
+      const {
+        path,
+        value
+      } = info;
       setMany(state, path, value);
     },
-    toggle: function toggle(state, info) {
-      var path = info.path;
+
+    toggle(state, info) {
+      const {
+        path
+      } = info;
       setOne(state, path, !getByPath(state, path));
     },
-    del: function del(state, info) {
-      var path = info.path;
+
+    del(state, info) {
+      const {
+        path
+      } = info;
       deleteMany(state, path);
-    }
-  }, ARRAY_METHODS.reduce(function (acc, method) {
-    var fn = function fn(state, info) {
-      var path = info.path,
-          args = info.args;
-      var arr = getByPath(state, path);
+    },
 
-      if (!isArray(arr)) {
-        throw Error('Argument must be an array.');
-      }
+    ...ARRAY_METHODS.reduce((acc, method) => {
+      const fn = (state, info) => {
+        const {
+          path,
+          args
+        } = info;
+        const arr = getByPath(state, path);
 
-      return arr[method].apply(arr, _toConsumableArray(args));
-    };
+        if (!isArray(arr)) {
+          throw Error('Argument must be an array.');
+        }
 
-    return Object.assign(acc, _defineProperty({}, method, fn));
-  }, {}));
+        return arr[method](...args);
+      };
 
-  var _loop = function _loop(type) {
-    var entry = store._mutations[type] || (store._mutations[type] = []);
+      return Object.assign(acc, {
+        [method]: fn
+      });
+    }, {})
+  };
+
+  for (const type in mutations) {
+    const entry = store._mutations[type] || (store._mutations[type] = []);
     entry.push(function wrappedMutationHandler(payload) {
       mutations[type].call(store, store.state, payload);
     });
-  };
-
-  for (var type in mutations) {
-    _loop(type);
   }
 
   return Object.assign(store, methods);

@@ -8,48 +8,7 @@
 
   var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
-  function ownKeys(object, enumerableOnly) {
-    var keys = Object.keys(object);
-
-    if (Object.getOwnPropertySymbols) {
-      var symbols = Object.getOwnPropertySymbols(object);
-      enumerableOnly && (symbols = symbols.filter(function (sym) {
-        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
-      })), keys.push.apply(keys, symbols);
-    }
-
-    return keys;
-  }
-
-  function _objectSpread2(target) {
-    for (var i = 1; i < arguments.length; i++) {
-      var source = null != arguments[i] ? arguments[i] : {};
-      i % 2 ? ownKeys(Object(source), !0).forEach(function (key) {
-        _defineProperty(target, key, source[key]);
-      }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) {
-        Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
-      });
-    }
-
-    return target;
-  }
-
-  function _defineProperty(obj, key, value) {
-    if (key in obj) {
-      Object.defineProperty(obj, key, {
-        value: value,
-        enumerable: true,
-        configurable: true,
-        writable: true
-      });
-    } else {
-      obj[key] = value;
-    }
-
-    return obj;
-  }
-
-  var ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
+  const ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
   function _typeof(obj) {
     "@babel/helpers - typeof";
@@ -177,42 +136,43 @@
   };
 
   function createPathStoreMethods() {
-    return _objectSpread2({
-      set: function set(path, value) {
+    return {
+      set(path, value) {
         setMany(this, path, value);
       },
-      toggle: function toggle(path) {
+
+      toggle(path) {
         setOne(this, path, !getByPath(this, path));
       },
-      get: function get(path) {
+
+      get(path) {
         return path ? getByPath(this, path) : this;
       },
-      del: function del(path) {
+
+      del(path) {
         deleteMany(this, path);
-      }
-    }, ARRAY_METHODS.reduce(function (acc, method) {
-      var fn = function fn() {
-        for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
-        }
+      },
 
-        var path = args.shift();
-        var arr = getByPath(this, path);
+      ...ARRAY_METHODS.reduce(function (acc, method) {
+        const fn = function (...args) {
+          const path = args.shift();
+          const arr = getByPath(this, path);
 
-        if (!isArray(arr)) {
-          throw Error('Argument must be an array.');
-        }
+          if (!isArray(arr)) {
+            throw Error('Argument must be an array.');
+          }
 
-        return arr[method].apply(arr, args);
-      };
+          return arr[method](...args);
+        };
 
-      return Object.assign(acc, _defineProperty({}, method, fn));
-    }, {}));
+        return Object.assign(acc, {
+          [method]: fn
+        });
+      }, {})
+    };
   }
 
-  var pathStorePiniaPlugin = function pathStorePiniaPlugin(ctx) {
-    return Object.assign(ctx.store.actions = ctx.store.actions || {}, createPathStoreMethods());
-  };
+  const pathStorePiniaPlugin = ctx => Object.assign(ctx.store.actions = ctx.store.actions || {}, createPathStoreMethods());
 
   exports.pathStorePiniaPlugin = pathStorePiniaPlugin;
 
