@@ -37,11 +37,11 @@ PathStore Pinia Plugin is registered like any other Pinia plugin.
 ```js
 // main.js
 import Vue from 'vue'
-import VueCompositionApi from '@vue/composition-api'
+import VueCompositionApi from '@vue/composition-api' // Only needed for Vue < v2.7
 import { PiniaVuePlugin, createPinia } from 'pinia'
 import { pathStorePiniaPlugin } from './modules/path_store/pathStorePiniaPlugin'
 
-Vue.use(VueCompositionApi)
+Vue.use(VueCompositionApi) // Only needed for Vue < v2.7
 Vue.use(PiniaVuePlugin)
 
 const pinia = createPinia()
