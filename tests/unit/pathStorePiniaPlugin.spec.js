@@ -1,4 +1,3 @@
-import VueCompositionApi from '@vue/composition-api'
 import { PiniaVuePlugin, createPinia, defineStore, mapStores } from 'pinia'
 import { createLocalVue, enableAutoDestroy, mount } from '@vue/test-utils'
 import { dataOf, waitNT } from '../utils'
@@ -8,7 +7,6 @@ enableAutoDestroy(afterEach)
 
 const localVue = createLocalVue()
 
-localVue.use(VueCompositionApi)
 localVue.use(PiniaVuePlugin)
 
 const pinia = createPinia()
