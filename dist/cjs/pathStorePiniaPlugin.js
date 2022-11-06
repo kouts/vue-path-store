@@ -1,12 +1,6 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var Vue = require('vue');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var Vue__default = /*#__PURE__*/_interopDefaultLegacy(Vue);
 
 const ARRAY_METHODS = ['pop', 'push', 'reverse', 'shift', 'sort', 'splice', 'unshift'];
 
@@ -19,24 +13,19 @@ function _typeof(obj) {
     return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
   }, _typeof(obj);
 }
-
 function isObject(obj) {
   return _typeof(obj) === 'object' && !Array.isArray(obj) && obj !== null;
 }
-
 function isNumeric(str) {
   return !isNaN(str) && !isNaN(parseFloat(str));
 }
-
 function isArray(arr) {
   return Array.isArray(arr);
 }
-
 function splitPath(str) {
   var regex = /([\w\s-]+)|\[([^\]]+)\]/g;
   var result = [];
   var path;
-
   while (path = regex.exec(str || '')) {
     if (str[path.index] === '[') {
       result.push(path[2]);
@@ -44,22 +33,17 @@ function splitPath(str) {
       result.push(path[1]);
     }
   }
-
   return result;
 }
-
 function getByPath(obj, path) {
   var parts = isArray(path) ? path : splitPath(path);
   var length = parts.length;
-
   for (var i = 0; i < length; i++) {
     if (typeof obj[parts[i]] === 'undefined') {
       return undefined;
     }
-
     obj = obj[parts[i]];
   }
-
   return obj;
 }
 
@@ -67,7 +51,6 @@ var setOne = function setOne(obj, pathStr, value) {
   var path = splitPath(pathStr);
   var length = path.length;
   var lastIndex = length - 1;
-
   for (var index = 0; index < length; index++) {
     var prop = path[index]; // If we are not on the last index
     // we start building the data object from the path
@@ -78,33 +61,30 @@ var setOne = function setOne(obj, pathStr, value) {
       if (objValue && _typeof(objValue) === 'object') {
         // eslint-disable-next-line no-prototype-builtins
         if (!objValue.hasOwnProperty('__ob__')) {
-          Vue__default["default"].set(obj, prop, objValue);
+          Vue.set(obj, prop, objValue);
         } // Array to object transformation
         // Check if parent path is an array, we are not on the last item
         // and the next key in the path is not a number
 
-
         if (isArray(objValue) && !isNumeric(path[index + 1])) {
-          Vue__default["default"].set(obj, prop, {});
+          Vue.set(obj, prop, {});
         }
       } else {
         // Create an empty object or an empty array based on the next path entry
         if (isNumeric(path[index + 1])) {
-          Vue__default["default"].set(obj, prop, []);
+          Vue.set(obj, prop, []);
         } else {
-          Vue__default["default"].set(obj, prop, {});
+          Vue.set(obj, prop, {});
         }
       }
     } else {
       // If we are on the last index then we just assign the the value to the data object
       // Note: If we used obj[prop] = value; arrays wouldn't be updated.
-      Vue__default["default"].set(obj, prop, value);
+      Vue.set(obj, prop, value);
     }
-
     obj = obj[prop];
   }
 };
-
 var setMany = function setMany(obj, path, value) {
   if (typeof path === 'string') {
     setOne(obj, path, value);
@@ -116,13 +96,11 @@ var setMany = function setMany(obj, path, value) {
     throw Error('Arguments must be either string or object.');
   }
 };
-
 var deleteOne = function deleteOne(obj, pathStr) {
   var path = splitPath(pathStr);
   var prop = path.pop();
-  Vue__default["default"]["delete"](getByPath(obj, path), prop);
+  Vue["delete"](getByPath(obj, path), prop);
 };
-
 var deleteMany = function deleteMany(obj, path) {
   if (typeof path === 'string') {
     deleteOne(obj, path);
@@ -140,31 +118,24 @@ function createPathStoreMethods() {
     set(path, value) {
       setMany(this, path, value);
     },
-
     toggle(path) {
       setOne(this, path, !getByPath(this, path));
     },
-
     get(path) {
       return path ? getByPath(this, path) : this;
     },
-
     del(path) {
       deleteMany(this, path);
     },
-
     ...ARRAY_METHODS.reduce(function (acc, method) {
       const fn = function (...args) {
         const path = args.shift();
         const arr = getByPath(this, path);
-
         if (!isArray(arr)) {
           throw Error('Argument must be an array.');
         }
-
         return arr[method](...args);
       };
-
       return Object.assign(acc, {
         [method]: fn
       });
