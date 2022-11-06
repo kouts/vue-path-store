@@ -1,3 +1,10 @@
+## [2.1.6](https://github.com/kouts/vue-path-store/compare/v2.1.5...v2.1.6) (2022-11-06)
+
+
+### Bug Fixes
+
+* updated eslint config, rollup and npm packages ([3469ba0](https://github.com/kouts/vue-path-store/commit/3469ba01553a76415e127b81696abf2a84110c35))
+
 ## [2.1.5](https://github.com/kouts/vue-path-store/compare/v2.1.4...v2.1.5) (2022-07-23)
 
 
