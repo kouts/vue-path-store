@@ -1,7 +1,7 @@
-import { PiniaVuePlugin, createPinia, defineStore, mapStores } from 'pinia'
 import { createLocalVue, enableAutoDestroy, mount } from '@vue/test-utils'
-import { dataOf, waitNT } from '../utils'
+import { createPinia, defineStore, mapStores, PiniaVuePlugin } from 'pinia'
 import { pathStorePiniaPlugin } from '@/pathStorePiniaPlugin'
+import { dataOf, waitNT } from '../utils'
 
 enableAutoDestroy(afterEach)
 
@@ -16,8 +16,8 @@ pinia.use(pathStorePiniaPlugin)
 const createTestComponent = (useTestStore) => ({
   template: '<pre>{{ testStore.data }}</pre>',
   computed: {
-    ...mapStores(useTestStore)
-  }
+    ...mapStores(useTestStore),
+  },
 })
 
 describe('pathStorePiniaPlugin', () => {
@@ -29,9 +29,9 @@ describe('pathStorePiniaPlugin', () => {
       id: 'test',
       state() {
         return {
-          data: null
+          data: null,
         }
-      }
+      },
     })
     const TestComponent = createTestComponent(useTestStore)
 
@@ -49,9 +49,9 @@ describe('pathStorePiniaPlugin', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.testStore.set('data', obj)
@@ -64,9 +64,9 @@ describe('pathStorePiniaPlugin', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.testStore.set('data', obj)

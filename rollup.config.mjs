@@ -1,9 +1,9 @@
 import babel from '@rollup/plugin-babel'
-import terser from '@rollup/plugin-terser'
 import { nodeResolve } from '@rollup/plugin-node-resolve'
+import terser from '@rollup/plugin-terser'
 
 const globals = {
-  vue: 'Vue'
+  vue: 'Vue',
 }
 
 const rollupConfigsModules = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePiniaPlugin'].map((name) => ({
@@ -14,16 +14,16 @@ const rollupConfigsModules = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePini
       format: 'umd',
       file: `dist/umd/${name}.js`,
       name,
-      globals
+      globals,
     },
     {
       format: 'es',
-      file: `dist/es/${name}.js`
+      file: `dist/es/${name}.js`,
     },
     {
       format: 'cjs',
-      file: `dist/cjs/${name}.js`
-    }
+      file: `dist/cjs/${name}.js`,
+    },
   ],
   plugins: [
     nodeResolve(),
@@ -34,12 +34,12 @@ const rollupConfigsModules = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePini
           '@vue/cli-plugin-babel/preset',
           {
             useBuiltIns: false,
-            modules: false
-          }
-        ]
-      ]
-    })
-  ]
+            modules: false,
+          },
+        ],
+      ],
+    }),
+  ],
 }))
 
 const rollupConfigsMin = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePiniaPlugin'].map((name) => ({
@@ -50,8 +50,8 @@ const rollupConfigsMin = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePiniaPlu
       format: 'umd',
       file: `dist/umd/${name}.min.js`,
       name,
-      globals
-    }
+      globals,
+    },
   ],
   plugins: [
     nodeResolve(),
@@ -62,13 +62,13 @@ const rollupConfigsMin = ['pathStore', 'pathStoreVuexPlugin', 'pathStorePiniaPlu
           '@vue/cli-plugin-babel/preset',
           {
             useBuiltIns: false,
-            modules: false
-          }
-        ]
-      ]
+            modules: false,
+          },
+        ],
+      ],
     }),
-    terser()
-  ]
+    terser(),
+  ],
 }))
 
 const rollupConfigs = rollupConfigsModules.concat(rollupConfigsMin)

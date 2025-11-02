@@ -6,11 +6,35 @@ module.exports = {
       componentsPath: '/docs/.examples/'
     })
   ],
+  configureWebpack: {
+    module: {
+      rules: [
+        {
+          test: /\.scss$/,
+          use: [
+            {
+              loader: 'sass-loader',
+              options: {
+                sassOptions: {
+                  silenceDeprecations: [
+                    'legacy-js-api',
+                    'import',
+                    'global-builtin',
+                    'color-functions',
+                    'abs-percent'
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
   dest: 'public',
   title: 'vue-path-store',
-  // eslint-disable-next-line max-len
+
   description:
-    // eslint-disable-next-line max-len
     'A simple state management solution for Vue, that uses the dot notation path syntax',
   themeConfig: {
     nav: [{ text: 'Github', link: 'https://github.com/kouts/vue-path-store' }],

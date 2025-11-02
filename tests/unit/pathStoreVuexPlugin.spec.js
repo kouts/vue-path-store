@@ -1,8 +1,8 @@
+import { createLocalVue, enableAutoDestroy, mount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { ARRAY_METHODS } from '@/constants'
-import { createLocalVue, enableAutoDestroy, mount } from '@vue/test-utils'
-import { dataOf, waitNT } from '../utils'
 import { pathStoreVuexPlugin } from '@/pathStoreVuexPlugin'
+import { dataOf, waitNT } from '../utils'
 
 enableAutoDestroy(afterEach)
 const localVue = createLocalVue()
@@ -10,7 +10,7 @@ const localVue = createLocalVue()
 localVue.use(Vuex)
 
 const TestComponent = {
-  template: '<pre>{{ $store.state.data }}</pre>'
+  template: '<pre>{{ $store.state.data }}</pre>',
 }
 
 describe('pathStoreVuexPlugin', () => {
@@ -19,7 +19,7 @@ describe('pathStoreVuexPlugin', () => {
 
   beforeEach(() => {
     store = new Vuex.Store({
-      plugins: [pathStoreVuexPlugin]
+      plugins: [pathStoreVuexPlugin],
     })
     wrapper = mount(TestComponent, { store, localVue })
   })
@@ -35,9 +35,9 @@ describe('pathStoreVuexPlugin', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.$store.set('data', obj)
@@ -50,9 +50,9 @@ describe('pathStoreVuexPlugin', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.$store.set('data', obj)

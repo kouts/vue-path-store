@@ -5,7 +5,7 @@
   `@vue/cli-service ^4.5.19 → ^5.0.8`  
    Webpack 4 is needed for Vuepress 1 compatibility
 
-- `@vue/test-utils ^1.3.3 → ^2.2.1`  
+- `@vue/test-utils ^1.3.6 → ^2.2.1`  
   Needed for Webpack 4 / Vuepress 1 compatibility
 
 - `@vue/vue2-jest ^27.0.0 → ^29.2.0`  
@@ -17,8 +17,8 @@
 - `rollup-plugin-vue ^5.1.9 → ^6.0.0`  
   Needed for Vue 2 compatibility
 
-- `sass-loader ^10.3.1 → ^13.1.0`  
+- `sass-loader ^10.5.2 → ^13.1.0`  
   Needed for Webpack 4 / Vuepress 1 compatibility
 
-- `vuex ^3.6.2 → ^4.1.0`  
+- `vuex ^3.6.2 → ^4.1.0`
   Needed for Vue 2 compatibility

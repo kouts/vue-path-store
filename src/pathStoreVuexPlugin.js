@@ -1,6 +1,6 @@
-import { ARRAY_METHODS } from './constants.js'
 import { deleteMany, setMany, setOne } from 'vue-set-path'
 import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
+import { ARRAY_METHODS } from './constants.js'
 
 const pathStoreVuexPlugin = (store) => {
   const methods = {
@@ -24,7 +24,7 @@ const pathStoreVuexPlugin = (store) => {
       }
 
       return Object.assign(acc, { [method]: fn })
-    }, {})
+    }, {}),
   }
 
   const mutations = {
@@ -56,7 +56,7 @@ const pathStoreVuexPlugin = (store) => {
       }
 
       return Object.assign(acc, { [method]: fn })
-    }, {})
+    }, {}),
   }
 
   for (const type in mutations) {

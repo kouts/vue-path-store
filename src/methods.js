@@ -1,6 +1,6 @@
-import { ARRAY_METHODS } from './constants.js'
 import { deleteMany, setMany, setOne } from 'vue-set-path'
 import { getByPath, isArray } from 'vue-set-path/dist/es/utils'
+import { ARRAY_METHODS } from './constants.js'
 
 export function createPathStoreMethods() {
   return {
@@ -29,6 +29,6 @@ export function createPathStoreMethods() {
       }
 
       return Object.assign(acc, { [method]: fn })
-    }, {})
+    }, {}),
   }
 }

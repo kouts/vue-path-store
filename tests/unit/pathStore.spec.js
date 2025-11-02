@@ -6,7 +6,7 @@ enableAutoDestroy(afterEach)
 const localVue = createLocalVue()
 
 const TestComponent = {
-  template: '<pre>{{ $ps.data }}</pre>'
+  template: '<pre>{{ $ps.data }}</pre>',
 }
 
 describe('pathStore', () => {
@@ -14,10 +14,10 @@ describe('pathStore', () => {
 
   beforeEach(() => {
     localVue.prototype.$ps = createPathStore({
-      data: null
+      data: null,
     })
     wrapper = mount(TestComponent, {
-      localVue
+      localVue,
     })
   })
 
@@ -32,9 +32,9 @@ describe('pathStore', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.$ps.set('data', obj)
@@ -47,9 +47,9 @@ describe('pathStore', () => {
       foo: {
         bar: {
           str: 'test',
-          num: 10
-        }
-      }
+          num: 10,
+        },
+      },
     }
 
     wrapper.vm.$ps.set('data', obj)
