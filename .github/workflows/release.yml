@@ -5,31 +5,22 @@ on:
     branches: [main]
 
 jobs:
-  ci:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node: [16]
-
+  test:
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout 🛎
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
 
-      - name: Setup node env 🏗
+      - name: Setup Node 16 for tests 🏗
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.node }}
+          node-version: 16
           check-latest: true
 
       - name: Install dependencies 📦
         run: npm install
-
-      - name: Install semantic-release extra plugins 📦
-        run: npm install --save-dev @semantic-release/changelog @semantic-release/git
 
       - name: Run linter 👀
         run: npm run lint-fix
@@ -40,8 +31,42 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Upload build artifacts 📤
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist/
+
+  release:
+    needs: test
+    runs-on: ubuntu-latest
+
+    permissions:
+      id-token: write
+      contents: write
+
+    steps:
+      - name: Checkout 🛎
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node 24 for release 🏗
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          check-latest: true
+
+      - name: Download build artifacts �
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+          path: dist/
+
+      - name: Install semantic-release extra plugins 📦
+        run: npm install --save-dev @semantic-release/changelog @semantic-release/git
+
       - name: Release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
