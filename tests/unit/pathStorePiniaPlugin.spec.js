@@ -5,14 +5,6 @@ import { dataOf, waitNT } from '../utils'
 
 enableAutoDestroy(afterEach)
 
-const localVue = createLocalVue()
-
-localVue.use(PiniaVuePlugin)
-
-const pinia = createPinia()
-
-pinia.use(pathStorePiniaPlugin)
-
 const createTestComponent = (useTestStore) => ({
   template: '<pre>{{ testStore.data }}</pre>',
   computed: {
@@ -23,8 +15,17 @@ const createTestComponent = (useTestStore) => ({
 describe('pathStorePiniaPlugin', () => {
   let useTestStore
   let wrapper
+  let pinia
+  let localVue
 
   beforeEach(() => {
+    // Create fresh localVue and pinia for each test
+    localVue = createLocalVue()
+    localVue.use(PiniaVuePlugin)
+
+    pinia = createPinia()
+    pinia.use(pathStorePiniaPlugin)
+
     useTestStore = defineStore({
       id: 'test',
       state() {

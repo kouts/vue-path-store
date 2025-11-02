@@ -7,10 +7,6 @@ settings:
 importers:
 
   .:
-    dependencies:
-      vue:
-        specifier: ^2.7.16
-        version: 2.7.16
     devDependencies:
       '@commitlint/cli':
         specifier: ^20.1.0
@@ -64,8 +60,8 @@ importers:
         specifier: ^1.2.0
         version: 1.2.0
       pinia:
-        specifier: ^2.3.1
-        version: 2.3.1(typescript@5.9.3)(vue@2.7.16)
+        specifier: 2.0.28
+        version: 2.0.28(typescript@5.9.3)(vue@2.7.16)
       prettier:
         specifier: 3.6.2
         version: 3.6.2
@@ -78,6 +74,12 @@ importers:
       sass-loader:
         specifier: ^10.5.2
         version: 10.5.2(sass@1.93.3)(webpack@4.47.0)
+      vue:
+        specifier: ^2.7.16
+        version: 2.7.16
+      vue-demi:
+        specifier: ^0.14.10
+        version: 0.14.10(vue@2.7.16)
       vue-set-path:
         specifier: ^1.1.11
         version: 1.1.11(vue@2.7.16)
@@ -5895,12 +5897,15 @@ packages:
     resolution: {integrity: sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==}
     engines: {node: '>=6'}
 
-  pinia@2.3.1:
-    resolution: {integrity: sha512-khUlZSwt9xXCaTbbxFYBKDc/bWAGWJjOgvxETwkTN7KRm66EeT1ZdZj6i2ceh9sP2Pzqsbc704r2yngBrxBVug==}
+  pinia@2.0.28:
+    resolution: {integrity: sha512-YClq9DkqCblq9rlyUual7ezMu/iICWdBtfJrDt4oWU9Zxpijyz7xB2xTwx57DaBQ96UGvvTMORzALr+iO5PVMw==}
     peerDependencies:
+      '@vue/composition-api': ^1.4.0
       typescript: '>=4.4.4'
-      vue: ^2.7.0 || ^3.5.11
+      vue: ^2.6.14 || ^3.2.0
     peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
       typescript:
         optional: true
 
@@ -8876,7 +8881,9 @@ snapshots:
       source-map: 0.6.1
       string-length: 2.0.0
     transitivePeerDependencies:
+      - bufferutil
       - supports-color
+      - utf-8-validate
 
   '@jest/source-map@24.9.0':
     dependencies:
@@ -15073,15 +15080,13 @@ snapshots:
 
   pify@4.0.1: {}
 
-  pinia@2.3.1(typescript@5.9.3)(vue@2.7.16):
+  pinia@2.0.28(typescript@5.9.3)(vue@2.7.16):
     dependencies:
       '@vue/devtools-api': 6.6.4
       vue: 2.7.16
       vue-demi: 0.14.10(vue@2.7.16)
     optionalDependencies:
       typescript: 5.9.3
-    transitivePeerDependencies:
-      - '@vue/composition-api'
 
   pinkie-promise@2.0.1:
     dependencies:
